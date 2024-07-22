@@ -1,0 +1,39 @@
+<resources>
+    <!--Titles-->
+    <string name="app_name">Calibración</string>
+    <string name="calibracion">Calibración</string>
+    <string name="version1">V1.0</string>
+    <string name="herbicidas">Herbicidas</string>
+    <string name="dosificacion">Dosificación</string>
+    <string name="fungicidas_insecticidas">Fungicidas e Insecticidas</string>
+    <string name="fungicidas">Fungicidas e Insecticidas</string>
+    <!--Buttons-->
+    <string name="aceptar">Aceptar</string>
+    <string name="atras">ATRÁS</string>
+    <string name="ayuda">AYUDA</string>
+    <string name="calcular">Calcular</string>
+    <string name="volumen_fijo">Volumen fijo</string>
+    <string name="velocidad_fija">Velocidad fija</string>
+    <string name="volumen_aplicado">Volumen aplicado</string>
+    <!--Instructions-->
+    <string name="responsabilidad">Descargo de responsabilidad\nEl uso de la aplicación móvil calibración y sus resultados corre por cuenta y riesgo propio del usuario. La Universidad de Costa Rica no asumirá ninguna responsabilidad por cualquier pérdida o daño por el uso o la información generada por la aplicación móvil Calibración.</string>
+    <string name="seleccionar_metodo">Seleccione un método de calibración:</string>
+    <string name="acronimos">PC = Producto Comercial\nl/ha = litros por hectárea</string>
+    <!--Input-->
+    <string name="area">Área</string>
+    <string name="volumen">Volumen</string>
+    <string name="cant_plantas">Cant Plantas</string>
+    <string name="dosis">Dosis</string>
+    <!--Text-->
+    <string name="resultado">Resultado</string>
+    <string name="resultado_pc_area">Resultado: PC (ml) por área</string>
+    <string name="resultado_pc_litro">Resultado: PC (ml) por litro de agua</string>
+    <string name="resultado_agua">Resultado: Agua necesaria (litros)</string>
+    <string name="volumen_de_aplicacion">Volumen de aplicación (l/ha):</string>
+    <string name="area_por_aplicar">Área por aplicar (m\u00B2):</string>
+    <string name="dosis_de_pc">Dosis de PC por ha (litros):</string>
+    <string name="herbicidas_logo">Herbicidas logo</string>
+    <string name="dosificacion_logo">Dosificacion logo</string>
+    <string name="fungicidas_e_insecticidas_logo">Fungicidas e insecticidas logo</string>
+    <string name="method_title_background">method title background</string>
+</resources>

@@ -10,6 +10,7 @@ Para el sistema operativo IOS, se desarrolló con el uso de la tecnología XCODE
 ## Créditos
 
 Desarrollador: Sebastián Venegas Brenes
+
 Diseñadores: 
 - Alejandra Brenes Bermúdez
 - Marianella Sanchéz Figueroa

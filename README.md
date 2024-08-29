@@ -8,4 +8,5 @@ Se desarrolló empleando el lenguaje de programación JAVA en la tecnología de 
 
 ## Créditos
 
-Desarrollador y diseñador: Sebastián Venegas Brenes
+Desarrollador: Sebastián Venegas Brenes
+Diseñadores: Alejandra Brenes Bermúdez, Marianella Sanchéz Figueroa, Monserrat Venegas Brenes, Sebastián Venegas Brenes

@@ -95,16 +95,16 @@
 
     <TextView
         android:id="@+id/textVel"
-        android:layout_width="@dimen/_140sdp"
+        android:layout_width="@dimen/_90sdp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="@dimen/_30sdp"
-        android:layout_marginEnd="@dimen/_8sdp"
+        android:layout_marginStart="@dimen/_40sdp"
+        android:layout_marginEnd="@dimen/_12sdp"
         android:layout_marginBottom="@dimen/_90sdp"
         android:fontFamily="@font/glacial"
-        android:text="Velocidad (m/s):"
+        android:gravity="center"
+        android:text="Velocidad"
         android:textColor="@color/black"
         android:textSize="@dimen/_16sdp"
-        android:gravity="center"
         app:layout_constraintBottom_toTopOf="@+id/imageResultShape"
         app:layout_constraintEnd_toStartOf="@+id/inputVel"
         app:layout_constraintStart_toStartOf="parent"
@@ -157,21 +157,20 @@
         android:id="@+id/inputVel"
         android:layout_width="@dimen/_115sdp"
         android:layout_height="@dimen/_40sdp"
-        android:layout_marginStart="@dimen/_8sdp"
-        android:layout_marginEnd="@dimen/_25sdp"
         android:layout_marginBottom="@dimen/_15sdp"
-        android:fontFamily="@font/glacial"
-        android:hint="Velocidad"
-        android:textSize="@dimen/_14sdp"
-        android:inputType="numberDecimal"
+        android:layout_marginStart="@dimen/_12sdp"
+        android:background="@drawable/edit_text_rounded"
         android:digits="0123456789."
+        android:fontFamily="@font/glacial"
+        android:gravity="center"
+        android:hint="Velocidad"
+        android:inputType="numberDecimal"
         android:textColor="@color/black"
         android:textColorHint="#B7373636"
-        android:gravity="center"
-        android:background="@drawable/edit_text_rounded"
+        android:textSize="@dimen/_14sdp"
         app:layout_constraintBottom_toTopOf="@+id/buttonCalcular"
+        app:layout_constraintStart_toEndOf="@id/textVel"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/textVel"
         app:layout_constraintTop_toBottomOf="@+id/inputAncho" />
 
     <Button
@@ -301,4 +300,16 @@
         app:layout_constraintVertical_bias="0.75"
         app:srcCompat="@drawable/icon_divider"
         android:contentDescription="Divider of icon panel" />
+
+    <Spinner
+        android:id="@+id/spinner"
+        android:layout_width="@dimen/_86sdp"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toTopOf="@+id/imageResultShape"
+        app:layout_constraintEnd_toStartOf="@+id/inputVel"
+        app:layout_constraintHorizontal_bias="0.7"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textVel"
+        app:layout_constraintVertical_bias="0.127" />
 </androidx.constraintlayout.widget.ConstraintLayout>
+

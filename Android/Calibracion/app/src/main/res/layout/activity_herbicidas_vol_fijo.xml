@@ -27,8 +27,8 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="@dimen/_15sdp"
         android:layout_marginTop="@dimen/_40sdp"
-        android:layout_marginBottom="@dimen/_15sdp"
         android:layout_marginEnd="@dimen/_16sdp"
+        android:layout_marginBottom="@dimen/_15sdp"
         android:fontFamily="@font/glacial"
         android:text="Método del volumen fijo"
         android:textColor="@color/black"
@@ -103,10 +103,10 @@
         android:text="Volumen de aplicación por hectárea (litros):"
         android:textColor="@color/black"
         android:textSize="@dimen/_16sdp"
-        app:layout_constraintTop_toBottomOf="@id/textAncho"
         app:layout_constraintBottom_toTopOf="@+id/textResultado"
         app:layout_constraintEnd_toStartOf="@+id/inputVolAplic"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/textAncho" />
 
     <EditText
         android:id="@+id/inputDescarga"
@@ -134,9 +134,9 @@
         android:layout_width="@dimen/_115sdp"
         android:layout_height="@dimen/_40sdp"
         android:layout_marginStart="@dimen/_4sdp"
-        android:layout_marginEnd="@dimen/_30sdp"
-        android:layout_marginBottom="@dimen/_5sdp"
         android:layout_marginTop="@dimen/_20sdp"
+        android:layout_marginEnd="@dimen/_30sdp"
+        android:layout_marginBottom="@dimen/_7sdp"
         android:background="@drawable/edit_text_rounded"
         android:digits="0123456789."
         android:fontFamily="@font/glacial"
@@ -146,18 +146,18 @@
         android:textColor="@color/black"
         android:textColorHint="#B7373636"
         android:textSize="@dimen/_14sdp"
-        app:layout_constraintTop_toBottomOf="@id/inputDescarga"
         app:layout_constraintBottom_toTopOf="@+id/inputVolAplic"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/textAncho" />
+        app:layout_constraintStart_toEndOf="@+id/textAncho"
+        app:layout_constraintTop_toBottomOf="@id/inputDescarga" />
 
     <EditText
         android:id="@+id/inputVolAplic"
         android:layout_width="@dimen/_115sdp"
         android:layout_height="@dimen/_40sdp"
         android:layout_marginStart="@dimen/_4sdp"
-        android:layout_marginEnd="@dimen/_30sdp"
         android:layout_marginTop="@dimen/_10sdp"
+        android:layout_marginEnd="@dimen/_30sdp"
         android:layout_marginBottom="@dimen/_10sdp"
         android:background="@drawable/edit_text_rounded"
         android:digits="0123456789."
@@ -168,10 +168,10 @@
         android:textColor="@color/black"
         android:textColorHint="#B7373636"
         android:textSize="@dimen/_14sdp"
-        app:layout_constraintTop_toBottomOf="@id/inputAncho"
         app:layout_constraintBottom_toTopOf="@+id/buttonCalcular"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/textVolAplic" />
+        app:layout_constraintStart_toEndOf="@+id/textVolAplic"
+        app:layout_constraintTop_toBottomOf="@id/inputAncho" />
 
     <Button
         android:id="@+id/buttonCalcular"
@@ -179,14 +179,14 @@
         android:layout_height="@dimen/_44sdp"
         android:layout_marginStart="@dimen/_198sdp"
         android:layout_marginEnd="@dimen/_28sdp"
-        android:layout_marginBottom="@dimen/_26sdp"
+        android:layout_marginBottom="@dimen/_30sdp"
         android:background="@drawable/rounded_button"
         android:fontFamily="@font/glacial"
         android:text="@string/calcular"
         android:textColor="@color/black"
         android:textSize="@dimen/_16sdp"
         app:backgroundTint="#7C9A63"
-        app:layout_constraintBottom_toTopOf="@+id/textMedida"
+        app:layout_constraintBottom_toTopOf="@+id/spinner"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent" />
@@ -196,13 +196,13 @@
         android:layout_width="@dimen/_150sdp"
         android:layout_height="@dimen/_50sdp"
         android:layout_marginBottom="@dimen/_70sdp"
+        android:contentDescription="Result shape image"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.45"
+        app:layout_constraintHorizontal_bias="0.38"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintVertical_bias="0.228"
-        app:srcCompat="@drawable/result_shape"
-        android:contentDescription="Result shape image" />
+        app:srcCompat="@drawable/result_shape" />
 
     <TextView
         android:id="@+id/textResultado"
@@ -218,17 +218,12 @@
         app:layout_constraintStart_toStartOf="@+id/imageResultShape"
         app:layout_constraintTop_toTopOf="@+id/imageResultShape" />
 
-    <TextView
-        android:id="@+id/textMedida"
-        android:layout_width="wrap_content"
+    <Spinner
+        android:id="@+id/spinner"
+        android:layout_width="@dimen/_86sdp"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="@dimen/_50sdp"
+        android:layout_marginEnd="@dimen/_5sdp"
         android:layout_marginBottom="@dimen/_80sdp"
-        android:fontFamily="@font/glacial"
-        android:text="m/s"
-        android:textColor="@color/black"
-        android:textSize="@dimen/_20sdp"
-        android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.869"
@@ -239,65 +234,65 @@
         android:layout_width="@dimen/_45sdp"
         android:layout_height="@dimen/_45sdp"
         android:layout_marginStart="@dimen/_12sdp"
+        android:contentDescription="@string/herbicidas_logo"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/imageDivider1"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/imageResultShape"
         app:layout_constraintVertical_bias="0.8"
-        app:srcCompat="@drawable/icon_herb"
-        android:contentDescription="@string/herbicidas_logo" />
+        app:srcCompat="@drawable/icon_herb" />
 
     <ImageView
         android:id="@+id/imageFungIcon"
         android:layout_width="@dimen/_45sdp"
         android:layout_height="@dimen/_45sdp"
+        android:contentDescription="@string/fungicidas_e_insecticidas_logo"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/imageDivider2"
         app:layout_constraintStart_toEndOf="@id/imageDivider1"
         app:layout_constraintTop_toBottomOf="@+id/imageResultShape"
         app:layout_constraintVertical_bias="0.8"
-        app:srcCompat="@drawable/icon_fung2"
-        android:contentDescription="@string/fungicidas_e_insecticidas_logo" />
+        app:srcCompat="@drawable/icon_fung2" />
 
     <ImageView
         android:id="@+id/imageDosIcon"
         android:layout_width="@dimen/_45sdp"
         android:layout_height="@dimen/_45sdp"
         android:layout_marginEnd="@dimen/_12sdp"
+        android:contentDescription="@string/dosificacion_logo"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.519"
         app:layout_constraintStart_toEndOf="@id/imageDivider2"
         app:layout_constraintTop_toBottomOf="@+id/imageResultShape"
         app:layout_constraintVertical_bias="0.8"
-        app:srcCompat="@drawable/icon_dosi"
-        android:contentDescription="@string/dosificacion_logo" />
+        app:srcCompat="@drawable/icon_dosi" />
 
     <ImageView
         android:id="@+id/imageDivider1"
         android:layout_width="@dimen/_40sdp"
         android:layout_height="@dimen/_38sdp"
+        android:contentDescription="Divider of icon panel"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/imageFungIcon"
         app:layout_constraintHorizontal_bias="0.509"
         app:layout_constraintStart_toEndOf="@+id/imageHerbIcon"
         app:layout_constraintTop_toBottomOf="@+id/imageResultShape"
         app:layout_constraintVertical_bias="0.75"
-        app:srcCompat="@drawable/icon_divider"
-        android:contentDescription="Divider of icon panel"/>
+        app:srcCompat="@drawable/icon_divider" />
 
     <ImageView
         android:id="@+id/imageDivider2"
         android:layout_width="@dimen/_40sdp"
         android:layout_height="@dimen/_38sdp"
+        android:contentDescription="Divider of icon panel"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/imageDosIcon"
+        app:layout_constraintHorizontal_bias="0.499"
         app:layout_constraintStart_toEndOf="@+id/imageFungIcon"
         app:layout_constraintTop_toBottomOf="@+id/imageResultShape"
-        app:layout_constraintHorizontal_bias="0.499"
         app:layout_constraintVertical_bias="0.75"
-        app:srcCompat="@drawable/icon_divider"
-        android:contentDescription="Divider of icon panel" />
+        app:srcCompat="@drawable/icon_divider" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

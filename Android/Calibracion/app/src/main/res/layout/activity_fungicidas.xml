@@ -111,3 +111,4 @@
         app:srcCompat="@drawable/icon_fung2"
         android:contentDescription="@string/fungicidas_e_insecticidas_logo" />
 </androidx.constraintlayout.widget.ConstraintLayout>
+<!--Copyright 2023-2024 Sebastian Venegas Brenes https://github.com/Vnegas/Mobile-Apps -->

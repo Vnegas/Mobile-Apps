@@ -1,3 +1,4 @@
+// Copyright 2023-2024 Sebastian Venegas Brenes https://github.com/Vnegas/Mobile-Apps
 package com.example.calibracion;
 
 import android.content.Intent;
@@ -77,6 +78,8 @@ public class herbicidas_vol_fijo extends AppCompatActivity implements AdapterVie
                 startActivity(intent);
             }
         });
+
+
 
         spinner = findViewById(R.id.spinner);
         spinner.setOnItemSelectedListener(this);

@@ -128,3 +128,4 @@
         app:srcCompat="@drawable/icon_herb"
         android:contentDescription="@string/herbicidas_logo" />
 </androidx.constraintlayout.widget.ConstraintLayout>
+<!--Copyright 2023-2024 Sebastian Venegas Brenes https://github.com/Vnegas/Mobile-Apps -->

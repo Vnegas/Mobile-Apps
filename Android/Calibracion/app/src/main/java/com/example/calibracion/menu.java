@@ -1,3 +1,4 @@
+// Copyright 2023-2024 Sebastian Venegas Brenes https://github.com/Vnegas/Mobile-Apps
 package com.example.calibracion;
 
 import android.content.Intent;
@@ -70,7 +71,7 @@ public class menu extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
-                goToUrl("https://www.youtube.com/watch?v=IT7lR4HCdZs");
+                goToUrl("https://www.youtube.com/watch?v=ufisItmEEpU&ab_channel=Malezas%26Arvenses");
 
             }
         });

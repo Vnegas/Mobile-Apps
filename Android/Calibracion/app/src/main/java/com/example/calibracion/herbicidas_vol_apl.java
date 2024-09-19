@@ -1,3 +1,4 @@
+// Copyright 2023-2024 Sebastian Venegas Brenes https://github.com/Vnegas/Mobile-Apps
 package com.example.calibracion;
 
 import android.content.Intent;

@@ -81,3 +81,4 @@
             app:strokeWidth="2dp" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </androidx.cardview.widget.CardView>
+<!--Copyright 2023-2024 Sebastian Venegas Brenes https://github.com/Vnegas/Mobile-Apps -->

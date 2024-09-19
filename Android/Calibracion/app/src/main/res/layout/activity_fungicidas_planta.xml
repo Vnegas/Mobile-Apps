@@ -237,9 +237,9 @@
         android:id="@+id/textMedida"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/_31sdp"
+        android:layout_marginTop="@dimen/_42sdp"
         android:layout_marginEnd="@dimen/_60sdp"
-        android:layout_marginBottom="@dimen/_80sdp"
+        android:layout_marginBottom="@dimen/_76sdp"
         android:fontFamily="@font/glacial"
         android:text="litros"
         android:textColor="#373636"
@@ -247,18 +247,21 @@
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toEndOf="@+id/imageResultShape"
-        app:layout_constraintTop_toBottomOf="@+id/buttonCalcular" />
+        app:layout_constraintTop_toBottomOf="@+id/buttonCalcular"
+        app:layout_constraintVertical_bias="0.0" />
 
     <ImageView
         android:id="@+id/imageResultShape"
         android:layout_width="@dimen/_160sdp"
         android:layout_height="@dimen/_50sdp"
-        android:layout_marginBottom="@dimen/_74sdp"
+        android:layout_marginBottom="@dimen/_80sdp"
+        android:layout_marginStart="@dimen/_100sdp"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.35"
         app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/textMedida"
         app:layout_constraintTop_toBottomOf="@+id/textCantPlantasTotales"
         app:srcCompat="@drawable/result_shape"
         android:contentDescription="Result shape image" />
@@ -343,3 +346,4 @@
         app:srcCompat="@drawable/icon_divider"
         android:contentDescription="Divider of icon panel" />
 </androidx.constraintlayout.widget.ConstraintLayout>
+<!--Copyright 2023-2024 Sebastian Venegas Brenes https://github.com/Vnegas/Mobile-Apps -->

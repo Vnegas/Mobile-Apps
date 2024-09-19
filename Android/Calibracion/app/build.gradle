@@ -38,7 +38,7 @@ dependencies {
     androidTestImplementation libs.ext.junit
     androidTestImplementation libs.espresso.core
 
-    // Responsive sizes
+    // Responsive sizes from https://github.com/intuit/sdp and https://github.com/intuit/ssp
     implementation libs.ssp.android
     implementation libs.sdp.android
 }

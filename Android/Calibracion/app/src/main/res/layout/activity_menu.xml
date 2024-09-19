@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:background="#F4F4F4"
-    tools:context="com.example.calibracin.menu">
+    tools:context="com.example.calibracion.menu">
 
     <ImageView
         android:id="@+id/imageView"
@@ -171,3 +171,4 @@
         app:srcCompat="@drawable/icon_dosi"
         android:contentDescription="@string/dosificacion_logo" />
 </androidx.constraintlayout.widget.ConstraintLayout>
+<!--Copyright 2023-2024 Sebastian Venegas Brenes https://github.com/Vnegas/Mobile-Apps -->

@@ -395,3 +395,4 @@
         app:srcCompat="@drawable/icon_divider"
         android:contentDescription="Divider of icon panel" />
 </androidx.constraintlayout.widget.ConstraintLayout>
+<!--Copyright 2023-2024 Sebastian Venegas Brenes https://github.com/Vnegas/Mobile-Apps -->

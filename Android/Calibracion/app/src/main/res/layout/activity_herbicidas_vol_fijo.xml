@@ -224,6 +224,7 @@
         android:layout_height="wrap_content"
         android:layout_marginEnd="@dimen/_5sdp"
         android:layout_marginBottom="@dimen/_80sdp"
+        android:theme="@android:style/Theme.Holo.Light.DarkActionBar"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.869"
@@ -296,3 +297,4 @@
         app:srcCompat="@drawable/icon_divider" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
+<!--Copyright 2023-2024 Sebastian Venegas Brenes https://github.com/Vnegas/Mobile-Apps -->

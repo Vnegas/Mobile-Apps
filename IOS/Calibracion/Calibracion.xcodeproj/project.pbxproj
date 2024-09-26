@@ -29,12 +29,41 @@
 		83245B682CA4E44700F72962 /* CalibracionUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = CalibracionUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
-/* Begin PBXFileSystemSynchronizedRootGroup section */
-		83245B502CA4E44400F72962 /* Calibracion */ = {
-			isa = PBXFileSystemSynchronizedRootGroup;
-			path = Calibracion;
-			sourceTree = "<group>";
+/* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
+		83CBA2C12CA50CF60002B33D /* Exceptions for "Calibracion" folder in "Calibracion" target */ = {
+			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
+			membershipExceptions = (
+				Assets.xcassets,
+				CalibracionApp.swift,
+				ContentView.swift,
+				Fonts/cambria.ttf,
+				Fonts/glacial.otf,
+				Fonts/noto_serif.ttf,
+				"Fonts/NotoSerifDisplay-ExtraCondensedItalic.ttf",
+				herbicidas.swift,
+				"Preview Content/Preview Assets.xcassets",
+			);
+			target = 83245B4D2CA4E44400F72962 /* Calibracion */;
 		};
+		83CBA2C22CA50CF60002B33D /* Exceptions for "Calibracion" folder in "CalibracionTests" target */ = {
+			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
+			membershipExceptions = (
+				Assets.xcassets,
+				CalibracionApp.swift,
+				ContentView.swift,
+				Fonts/cambria.ttf,
+				Fonts/glacial.otf,
+				Fonts/noto_serif.ttf,
+				"Fonts/NotoSerifDisplay-ExtraCondensedItalic.ttf",
+				herbicidas.swift,
+				Info.plist,
+				"Preview Content/Preview Assets.xcassets",
+			);
+			target = 83245B5D2CA4E44700F72962 /* CalibracionTests */;
+		};
+/* End PBXFileSystemSynchronizedBuildFileExceptionSet section */
+
+/* Begin PBXFileSystemSynchronizedRootGroup section */
 		83245B612CA4E44700F72962 /* CalibracionTests */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
 			path = CalibracionTests;
@@ -43,6 +72,15 @@
 		83245B6B2CA4E44700F72962 /* CalibracionUITests */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
 			path = CalibracionUITests;
+			sourceTree = "<group>";
+		};
+		83CBA2BC2CA50CF60002B33D /* Calibracion */ = {
+			isa = PBXFileSystemSynchronizedRootGroup;
+			exceptions = (
+				83CBA2C12CA50CF60002B33D /* Exceptions for "Calibracion" folder in "Calibracion" target */,
+				83CBA2C22CA50CF60002B33D /* Exceptions for "Calibracion" folder in "CalibracionTests" target */,
+			);
+			path = Calibracion;
 			sourceTree = "<group>";
 		};
 /* End PBXFileSystemSynchronizedRootGroup section */
@@ -75,7 +113,7 @@
 		83245B452CA4E44400F72962 = {
 			isa = PBXGroup;
 			children = (
-				83245B502CA4E44400F72962 /* Calibracion */,
+				83CBA2BC2CA50CF60002B33D /* Calibracion */,
 				83245B612CA4E44700F72962 /* CalibracionTests */,
 				83245B6B2CA4E44700F72962 /* CalibracionUITests */,
 				83245B4F2CA4E44400F72962 /* Products */,
@@ -107,9 +145,6 @@
 			);
 			dependencies = (
 			);
-			fileSystemSynchronizedGroups = (
-				83245B502CA4E44400F72962 /* Calibracion */,
-			);
 			name = Calibracion;
 			packageProductDependencies = (
 			);
@@ -132,6 +167,7 @@
 			);
 			fileSystemSynchronizedGroups = (
 				83245B612CA4E44700F72962 /* CalibracionTests */,
+				83CBA2BC2CA50CF60002B33D /* Calibracion */,
 			);
 			name = CalibracionTests;
 			packageProductDependencies = (
@@ -398,6 +434,7 @@
 				DEVELOPMENT_ASSET_PATHS = "\"Calibracion/Preview Content\"";
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = Calibracion/Info.plist;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -426,6 +463,7 @@
 				DEVELOPMENT_ASSET_PATHS = "\"Calibracion/Preview Content\"";
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = Calibracion/Info.plist;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;

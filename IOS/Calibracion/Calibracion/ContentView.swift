@@ -15,21 +15,70 @@ struct ContentView: View {
                 Image("menu_bg")
                     .resizable(resizingMode: .stretch)
                     .aspectRatio(contentMode: .fill)
+                    .frame(width: /*@START_MENU_TOKEN@*/500.0/*@END_MENU_TOKEN@*/, height: 980.0)
+                    
                 
                 LazyVStack {
-                    Text("Calibracion")
+                    // Title
+                    Text("Calibración")
                         .foregroundColor(.white)
                         .font(.custom("NotoSerifDisplay-ExtraCondensedItalic", size: 44))
                         .fontWeight(.bold)
+                        .padding()
                     
+                        // Button to Herbicidas
+                        NavigationLink(destination: herbicidas()) {
+                            // Herbicidas icon
+                            Image("icon_herb")
+                                .resizable(resizingMode: .stretch)
+                                .frame(width: 49.4, height: 42.9)
+                            
+                            Text("HERBICIDAS")
+                                .font(.custom("GlacialIndifference-Regular", size: 31))
+                                .frame(width: 240, height: 104, alignment: .center)
+                                .foregroundColor(.accent)
+                                .cornerRadius(80)
+                        }.background {
+                            RoundedRectangle(cornerRadius: 80)
+                                .fill(.white)
+                                .stroke(.accent, lineWidth: 4)
+                        }
                     
+                    // Button to Fungicidas
                     NavigationLink(destination: herbicidas()) {
-                        Text("HERBICIDAS")
-                            .frame(width: 300, height: 100, alignment: .center)
-                            .background(Color.white).foregroundColor(.accent)
+                        // Herbicidas icon
+                        Image("icon_fung2")
+                            .resizable(resizingMode: .stretch)
+                            .frame(width: 49.4, height: 39.0)
                         
-                    }.border(Color.accent, width: 5).cornerRadius(80)
+                        Text("FUNGICIDAS E INSECTICIDAS")
+                            .font(.custom("GlacialIndifference-Regular", size: 31))
+                            .frame(width: 240, height: 104, alignment: .center)
+                            .foregroundColor(.accent)
+                            .cornerRadius(80)
+                    }.background {
+                        RoundedRectangle(cornerRadius: 80)
+                            .fill(.white)
+                            .stroke(.accent, lineWidth: 4)
+                    }
                     
+                    // Button to Dosificacion
+                    NavigationLink(destination: herbicidas()) {
+                        // Herbicidas icon
+                        Image("icon_dosi")
+                            .resizable(resizingMode: .stretch)
+                            .frame(width: 49.4, height: 39.0)
+                        
+                        Text("DOSIFICACIÓN")
+                            .font(.custom("GlacialIndifference-Regular", size: 31))
+                            .frame(width: 240, height: 104, alignment: .center)
+                            .foregroundColor(.accent)
+                            .cornerRadius(80)
+                    }.background {
+                        RoundedRectangle(cornerRadius: 80)
+                            .fill(.white)
+                            .stroke(.accent, lineWidth: 4)
+                    }
                 }
             }
         }

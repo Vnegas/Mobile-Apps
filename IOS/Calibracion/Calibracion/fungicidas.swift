@@ -1,14 +1,14 @@
 //
-//  herbicidas.swift
+//  fungicidas.swift
 //  Calibracion
 //
-//  Created by vnegas on 25/9/24.
+//  Created by vnegas on 13/10/24.
 //  Copyright 2023-2024 Sebastian Venegas Brenes https://github.com/Vnegas/Mobile-Apps
 //
 
 import SwiftUI
 
-struct herbicidas: View {
+struct fungicidas: View {
     @Binding var goToMenu: Bool
     let screenWidth = UIScreen.main.bounds.size.width;
     
@@ -17,12 +17,12 @@ struct herbicidas: View {
             // Screen Title
             HStack {
                 // Herbicidas icon
-                Image("icon_herb")
+                Image("icon_fung2")
                     .resizable(resizingMode: .stretch)
                     .offset(x: 10)
                     .frame(width: 59.8, height: 59.8)
                 // Title
-                Text("Herbicidas")
+                Text("Fungicidas e Insecticidas")
                     .foregroundColor(.black)
                     .font(.custom("NotoSerifDisplay-ExtraCondensedItalic", size: 49.4))
                     .fontWeight(.bold)
@@ -34,37 +34,28 @@ struct herbicidas: View {
                 .font(.custom("GlacialIndifference-Regular", size: 28.6))
                 .fontWeight(.bold)
                 .frame(width: 338, height: 76, alignment: .center)
-            Spacer(minLength: 40)
+            Spacer(minLength: 60)
             // Button to VolumenFijo
-            NavigationLink(destination: herbicidas_vol_fijo()) {
-                Text("Volumen fijo")
-                    .font(.custom("GlacialIndifference-Regular", size: 27.3))
-                    .frame(width: 286, height: 72, alignment: .center)
+            NavigationLink(destination: fungicidas_area()) {
+                Text("Por área")
+                    .font(.custom("GlacialIndifference-Regular", size: 28.6))
+                    .frame(width: 182, height: 72, alignment: .center)
                     .foregroundColor(.black)
                     .background(.accent)
                     .cornerRadius(20)
             }
             Spacer(minLength: 30)
             // Button to VelocidadFija
-            NavigationLink(destination: herbicidas_vel_fija()) {
-                Text("Velocidad fija")
-                    .font(.custom("GlacialIndifference-Regular", size: 27.3))
-                    .frame(width: 286, height: 72, alignment: .center)
+            NavigationLink(destination: fungicidas_planta()) {
+                Text("Por planta")
+                    .font(.custom("GlacialIndifference-Regular", size: 28.6))
+                    .frame(width: 182, height: 72, alignment: .center)
                     .foregroundColor(.black)
                     .background(.accent)
                     .cornerRadius(20)
             }
-            Spacer(minLength: 30)
-            // Button to VolumenAplicado
-            NavigationLink(destination: herbicidas_vol_apl()) {
-                Text("Volumen aplicado")
-                    .font(.custom("GlacialIndifference-Regular", size: 27.3))
-                    .frame(width: 286, height: 72, alignment: .center)
-                    .foregroundColor(.black)
-                    .background(.accent)
-                    .cornerRadius(20)
-            }
-            Spacer(minLength: 74)
+            Spacer(minLength: 90)
+            // Button to go back
             // Button to go back
             Text("ATRÁS")
                 .font(.custom("GlacialIndifference-Regular", size: 28.6))
@@ -80,5 +71,5 @@ struct herbicidas: View {
 }
 
 #Preview {
-    //herbicidas()
+    //fungicidas()
 }

@@ -48,6 +48,7 @@
 				herbicidas_vol_fijo.swift,
 				herbicidas.swift,
 				"Preview Content/Preview Assets.xcassets",
+				start.swift,
 			);
 			target = 83245B4D2CA4E44400F72962 /* Calibracion */;
 		};
@@ -70,6 +71,7 @@
 				herbicidas.swift,
 				Info.plist,
 				"Preview Content/Preview Assets.xcassets",
+				start.swift,
 			);
 			target = 83245B5D2CA4E44700F72962 /* CalibracionTests */;
 		};

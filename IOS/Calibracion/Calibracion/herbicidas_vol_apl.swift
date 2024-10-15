@@ -30,3 +30,7 @@ struct herbicidas_vol_apl: View {
         }
     }
 }
+
+#Preview {
+    //herbicidas_vol_apl()
+}

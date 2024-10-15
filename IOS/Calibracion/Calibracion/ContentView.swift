@@ -9,6 +9,7 @@
 import SwiftUI
 
 struct menu: View {
+    @Binding var goToStart: Bool
     @State private var goToMenu = false
     let screenWidth = UIScreen.main.bounds.size.width;
     var body: some View {
@@ -87,33 +88,31 @@ struct menu: View {
                     Spacer(minLength: 70)
                     HStack {
                         // Button to go back
-                        NavigationLink(destination: menu()) {
-                            Text("ATRÁS")
-                                .font(.custom("GlacialIndifference-Regular", size: 28.6))
-                                .foregroundColor(.black)
-                                .multilineTextAlignment(.leading)
-                        }
+                        Text("ATRÁS")
+                            .font(.custom("GlacialIndifference-Regular", size: 28.6))
+                            .foregroundColor(.black)
+                            .multilineTextAlignment(.leading)
+                            .onTapGesture {
+                                goToStart = false
+                            }
                         Spacer(minLength: 5)
                         // Button to go to Youtube video for help
-                        NavigationLink(destination: menu()) {
-                            Text("AYUDA")
-                                .font(.custom("GlacialIndifference-Regular", size: 28.6))
-                                .foregroundColor(.black)
-                                .multilineTextAlignment(.trailing)
-                                
-                        }
+                        Text("AYUDA")
+                            .font(.custom("GlacialIndifference-Regular", size: 28.6))
+                            .foregroundColor(.black)
+                            .multilineTextAlignment(.trailing)
                     }.frame(width: screenWidth - 80, height: 34)
                     Spacer()
                 }
-                // Default back button disabled
-                .navigationBarBackButtonHidden(true)
             }
         }
+        // Default back button disabled
+        .navigationBarBackButtonHidden(true)
     }
 }
 
 #Preview {
-    menu()
+    //menu()
 }
 
 // FUENTES

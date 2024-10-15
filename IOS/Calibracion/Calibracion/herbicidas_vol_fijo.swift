@@ -31,3 +31,6 @@ struct herbicidas_vol_fijo: View {
     }
 }
 
+#Preview {
+    //herbicidas_vol_fijo()
+}

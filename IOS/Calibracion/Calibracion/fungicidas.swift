@@ -56,7 +56,6 @@ struct fungicidas: View {
             }
             Spacer(minLength: 90)
             // Button to go back
-            // Button to go back
             Text("ATRÁS")
                 .font(.custom("GlacialIndifference-Regular", size: 28.6))
                 .foregroundColor(.black)

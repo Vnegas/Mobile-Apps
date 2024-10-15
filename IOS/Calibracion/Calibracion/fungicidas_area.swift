@@ -31,3 +31,6 @@ struct fungicidas_area: View {
     }
 }
 
+#Preview {
+    //fungicidas_area()
+}

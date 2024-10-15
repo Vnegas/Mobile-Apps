@@ -31,3 +31,6 @@ struct herbicidas_vel_fija: View {
     }
 }
 
+#Preview {
+    //herbicidas_vel_fija()
+}

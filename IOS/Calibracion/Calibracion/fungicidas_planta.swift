@@ -31,3 +31,6 @@ struct fungicidas_planta: View {
     }
 }
 
+#Preview {
+    //fungicidas_planta()
+}

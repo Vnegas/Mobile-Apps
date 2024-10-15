@@ -12,7 +12,7 @@ import SwiftUI
 struct CalibracionApp: App {
     var body: some Scene {
         WindowGroup {
-            menu()
+            start()
         }
     }
 }

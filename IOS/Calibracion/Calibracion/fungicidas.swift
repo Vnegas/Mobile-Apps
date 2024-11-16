@@ -9,7 +9,12 @@
 import SwiftUI
 
 struct fungicidas: View {
-    @Binding var goToMenu: Bool
+    // @Binding var goToMenuFromFung: Bool
+    @Binding var goToMenuFromHerb: Bool
+    @State private var goToMenuFung = false
+    @State private var goToFungArea = false
+    @State private var goToFungPlanta = false
+    
     let screenWidth = UIScreen.main.bounds.size.width;
     
     var body: some View {
@@ -36,7 +41,7 @@ struct fungicidas: View {
                 .frame(width: 338, height: 76, alignment: .center)
             Spacer(minLength: 60)
             // Button to VolumenFijo
-            NavigationLink(destination: fungicidas_area()) {
+            NavigationLink(destination: fungicidas_area(goToFungicidasMenu: $goToMenuFung, goToHerbicidasMenu: $goToMenuFromHerb, goToDosificacionM: $goToMenuFung), isActive: $goToFungArea) {
                 Text("Por área")
                     .font(.custom("GlacialIndifference-Regular", size: 28.6))
                     .frame(width: 182, height: 72, alignment: .center)
@@ -46,7 +51,7 @@ struct fungicidas: View {
             }
             Spacer(minLength: 30)
             // Button to VelocidadFija
-            NavigationLink(destination: fungicidas_planta()) {
+            NavigationLink(destination: fungicidas_planta(goToFungicidasMenu: $goToMenuFung, goToHerbicidasMenu: $goToMenuFung), isActive: $goToFungPlanta) {
                 Text("Por planta")
                     .font(.custom("GlacialIndifference-Regular", size: 28.6))
                     .frame(width: 182, height: 72, alignment: .center)
@@ -56,13 +61,12 @@ struct fungicidas: View {
             }
             Spacer(minLength: 90)
             // Button to go back
-            Text("ATRÁS")
-                .font(.custom("GlacialIndifference-Regular", size: 28.6))
-                .foregroundColor(.black)
-                .frame(width: screenWidth - 70, height: 34, alignment: .leading)
-                .onTapGesture {
-                    goToMenu = false
-                }
+            NavigationLink(destination: menu(goToStart: $goToMenuFung), isActive: $goToMenuFung) {
+                Text("ATRÁS")
+                    .font(.custom("GlacialIndifference-Regular", size: 28.6))
+                    .foregroundColor(.black)
+                    .frame(width: screenWidth - 70, height: 34, alignment: .leading)
+            }
             // Default back button disabled
             .navigationBarBackButtonHidden(true)
         }.background(.white)

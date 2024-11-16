@@ -10,7 +10,8 @@ import SwiftUI
 
 struct menu: View {
     @Binding var goToStart: Bool
-    @State private var goToMenu = false
+    @State private var goToHerbicidas = false
+    @State private var goToFungicidas = false
     let screenWidth = UIScreen.main.bounds.size.width;
     var body: some View {
         NavigationView {
@@ -29,7 +30,7 @@ struct menu: View {
                         .padding()
                     Spacer(minLength: 50)
                     // Button to Herbicidas
-                    NavigationLink(destination: herbicidas(goToMenu: $goToMenu), isActive: $goToMenu) {
+                    NavigationLink(destination: herbicidas(goToMenuFromHerb: $goToHerbicidas), isActive: $goToHerbicidas) {
                         // Herbicidas icon
                         Image("icon_herb")
                             .resizable(resizingMode: .stretch)
@@ -49,7 +50,7 @@ struct menu: View {
                     }
                     Spacer(minLength: 30)
                     // Button to Fungicidas
-                    NavigationLink(destination: fungicidas(goToMenu: $goToMenu), isActive: $goToMenu) {
+                    NavigationLink(destination: fungicidas(goToMenuFromHerb: $goToHerbicidas), isActive: $goToFungicidas) {
                         // Herbicidas icon
                         Image("icon_fung2")
                             .resizable(resizingMode: .stretch)
@@ -68,7 +69,7 @@ struct menu: View {
                     }
                     Spacer(minLength: 30)
                     // Button to Dosificacion
-                    NavigationLink(destination: herbicidas(goToMenu: $goToMenu), isActive: $goToMenu) {
+                    NavigationLink(destination: herbicidas(goToMenuFromHerb: $goToHerbicidas), isActive: $goToHerbicidas) {
                         // Herbicidas icon
                         Image("icon_dosi")
                             .resizable(resizingMode: .stretch)

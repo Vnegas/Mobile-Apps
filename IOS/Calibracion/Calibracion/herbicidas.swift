@@ -9,7 +9,8 @@
 import SwiftUI
 
 struct herbicidas: View {
-    @Binding var goToMenu: Bool
+    @Binding var goToMenuFromHerb: Bool
+    @State private var goToMenuHerb = false
     let screenWidth = UIScreen.main.bounds.size.width;
     
     var body: some View {
@@ -66,13 +67,12 @@ struct herbicidas: View {
             }
             Spacer(minLength: 74)
             // Button to go back
-            Text("ATRÁS")
-                .font(.custom("GlacialIndifference-Regular", size: 28.6))
-                .foregroundColor(.black)
-                .frame(width: screenWidth - 70, height: 34, alignment: .leading)
-                .onTapGesture {
-                    goToMenu = false
-                }
+            NavigationLink(destination: menu(goToStart: $goToMenuHerb), isActive: $goToMenuHerb) {
+                Text("ATRÁS")
+                    .font(.custom("GlacialIndifference-Regular", size: 28.6))
+                    .foregroundColor(.black)
+                    .frame(width: screenWidth - 70, height: 34, alignment: .leading)
+            }
             // Default back button disabled
             .navigationBarBackButtonHidden(true)
         }.background(.white)

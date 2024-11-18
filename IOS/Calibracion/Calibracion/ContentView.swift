@@ -99,7 +99,7 @@ struct menu: View {
                             }
                         Spacer(minLength: 5)
                         // Button to go to Youtube video for help
-                        Text("AYUDA")
+                        Link("AYUDA", destination: URL(string: "https://www.youtube.com/watch?v=ufisItmEEpU&ab_channel=Malezas%26Arvenses")!)
                             .font(.custom("GlacialIndifference-Regular", size: 28.6))
                             .foregroundColor(.black)
                             .multilineTextAlignment(.trailing)

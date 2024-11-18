@@ -38,9 +38,10 @@ struct fungicidas: View {
                 .font(.custom("GlacialIndifference-Regular", size: 28.6))
                 .fontWeight(.bold)
                 .frame(width: 338, height: 76, alignment: .center)
+                .multilineTextAlignment(.center)
             Spacer(minLength: 60)
             // Button to VolumenFijo
-            NavigationLink(destination: fungicidas_area(goToFungicidasMenu: $goToMenuFung, goToHerbicidasMenu: $goToMenuFromHerb, goToDosificacionM: $goToMenuFung), isActive: $goToFungArea) {
+            NavigationLink(destination: fungicidas_area(goToFungicidasMenu: $goToMenuFung, goToHerbicidasMenu: $goToMenuFromHerb), isActive: $goToFungArea) {
                 Text("Por área")
                     .font(.custom("GlacialIndifference-Regular", size: 28.6))
                     .frame(width: 182, height: 72, alignment: .center)

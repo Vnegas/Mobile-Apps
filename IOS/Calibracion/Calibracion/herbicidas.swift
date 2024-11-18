@@ -38,6 +38,7 @@ struct herbicidas: View {
                 .font(.custom("GlacialIndifference-Regular", size: 28.6))
                 .fontWeight(.bold)
                 .frame(width: 338, height: 76, alignment: .center)
+                .multilineTextAlignment(.center)
             Spacer(minLength: 40)
             // Button to VolumenFijo
             NavigationLink(destination: herbicidas_vol_fijo(goToHerbicidasMenu: $goToMenuFromHerb), isActive: $goToHerbVolFijo) {

@@ -12,6 +12,7 @@ struct menu: View {
     @Binding var goToStart: Bool
     @State private var goToHerbicidas = false
     @State private var goToFungicidas = false
+    @State private var goToDosificacion = false
     let screenWidth = UIScreen.main.bounds.size.width;
     var body: some View {
         NavigationView {
@@ -69,7 +70,7 @@ struct menu: View {
                     }
                     Spacer(minLength: 30)
                     // Button to Dosificacion
-                    NavigationLink(destination: herbicidas(goToMenuFromHerb: $goToHerbicidas), isActive: $goToHerbicidas) {
+                    NavigationLink(destination: dosificacion(goToHerbicidasMenu: $goToHerbicidas), isActive: $goToDosificacion) {
                         // Herbicidas icon
                         Image("icon_dosi")
                             .resizable(resizingMode: .stretch)
@@ -116,41 +117,35 @@ struct menu: View {
     //menu()
 }
 
+// Allows color in hex code: "#373636"
+extension Color {
+    init(hex: String) {
+        let hex = hex.trimmingCharacters(in: CharacterSet.alphanumerics.inverted)
+        var int: UInt64 = 0
+        Scanner(string: hex).scanHexInt64(&int)
+        let a, r, g, b: UInt64
+        switch hex.count {
+        case 3: // RGB (12-bit)
+            (a, r, g, b) = (255, (int >> 8 * 17) & 0xFF, (int >> 4 * 17) & 0xFF, (int * 17) & 0xFF)
+        case 6: // RGB (24-bit)
+            (a, r, g, b) = (255, (int >> 16) & 0xFF, (int >> 8) & 0xFF, int & 0xFF)
+        case 8: // ARGB (32-bit)
+            (a, r, g, b) = ((int >> 24) & 0xFF, (int >> 16) & 0xFF, (int >> 8) & 0xFF, int & 0xFF)
+        default:
+            (a, r, g, b) = (255, 0, 0, 0)
+        }
+        self.init(
+            .sRGB,
+            red: Double(r) / 255,
+            green: Double(g) / 255,
+            blue:  Double(b) / 255,
+            opacity: Double(a) / 255
+        )
+    }
+}
+
 // FUENTES
 // Cambria
 // GlacialIndifference-Regular
 // NotoSerifDisplay-ExtraCondensed
 // NotoSerifDisplay-ExtraCondensedItalic
-
-/*
- init() {
-     for familyName in UIFont.familyNames {
-         print(familyName)
-         for fontName in UIFont.fontNames(forFamilyName:
-                                             familyName) {
-             print("-- \(fontName)")
-         }
-     }
- }
- */
-
-// ATRAS BOTON
-/*
- @Environment(\.presentationMode) private var
-     presentationMode: Binding<PresentationMode>
- 
- 
- Spacer()
-     .navigationBarBackButtonHidden(true)
-     .toolbar(content: {
-         ToolbarItem(placement:
-                 .navigationBarLeading) {
-                     Button(action: {
-                         presentationMode.wrappedValue.dismiss()
-                     }, label: {
-                         Text("Atrás").foregroundColor(.black)
-                     })
-                            
-                }
-    })
- */

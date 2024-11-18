@@ -14,16 +14,15 @@ struct fungicidas_planta: View {
     // Navigation variables
     @Binding var goToFungicidasMenu: Bool
     @Binding var goToHerbicidasMenu: Bool
-    // @Binding var goToDosificacionM: Bool
     @State private var goToHerbicidas = false
     @State private var goToFungicidas = false
     @State private var goToDosificacion = false
     
     // Input variables
-    @State private var areaAplicada: Double? = nil
+    @State private var cantPlantas: Double? = nil
     @State private var volumenInicial: Double? = nil
     @State private var volumenFinal: Double? = nil
-    @State private var areaCultivo: Double? = nil
+    @State private var cantPlantasTot: Double? = nil
     @State private var resultado: Double? = nil
     
     // State variables to control placeholder display - See if input is already introduced
@@ -60,44 +59,45 @@ struct fungicidas_planta: View {
                 VStack {
                     // Screen Title
                     Spacer(minLength: 25)
-                    Text("Área")
+                    Text("Planta")
                         .font(.custom("GlacialIndifference-Regular", size: 34))
                         .foregroundColor(.black)
                         // .frame(width: 150, height: 47, alignment: .center)
                     // Method description
                     Spacer(minLength: 10)
-                    Text("Marque un área conocida y aplique allí agua a la velocidad usual.")
+                    Text("Cuente un número de plantas y aplique allí agua a la velocidad usual.")
                         .font(.custom("GlacialIndifference-Regular", size: 24))
                         .foregroundColor(Color(hex: "#373636"))
                         .frame(width: 364, height: 120, alignment: .center)
+                        .multilineTextAlignment(.center)
                 }
             }
-            Spacer(minLength: 28)
+            Spacer(minLength: 22)
             
             // First input
-            inputField("Área aplicada (m", exponent: "2", value: createBinding(for: $areaAplicada, placeholderIndex: 0), placeholderIndex: 0, hint: "Área")
+            inputField("Cantidad de plantas aplicadas:", value: createBinding(for: $cantPlantas, placeholderIndex: 0), placeholderIndex: 0, hint: "Cant Plantas")
             // Second input
-            inputField("Volumen inicial (litros", value: createBinding(for: $volumenInicial, placeholderIndex: 1), placeholderIndex: 1, hint: "Volumen")
+            inputField("Volumen inicial (litros):", value: createBinding(for: $volumenInicial, placeholderIndex: 1), placeholderIndex: 1, hint: "Volumen")
             // Third input
-            inputField("Volumen final (litros", value: createBinding(for: $volumenFinal, placeholderIndex: 2), placeholderIndex: 2, hint: "Volumen")
+            inputField("Volumen final (litros):", value: createBinding(for: $volumenFinal, placeholderIndex: 2), placeholderIndex: 2, hint: "Volumen")
             // Fourth input
-            inputField("Área del cultivo por aplicar (m", exponent: "2", value: createBinding(for: $areaCultivo, placeholderIndex: 3), placeholderIndex: 3, hint: "Área")
+            inputField("Cantidad de plantas totales en la parcela por aplicar:", value: createBinding(for: $cantPlantasTot, placeholderIndex: 3), placeholderIndex: 3, hint: "Cant Plantas")
             
             // Calculate button
-            Spacer(minLength: 25)
+            Spacer(minLength: 20)
             HStack {
                 Spacer() // Pushes the text to the right
                 Button(action: {
                     // Check if any input is missing
                     showPlaceholder = [
-                        areaAplicada == nil,
+                        cantPlantas == nil,
                         volumenInicial == nil,
                         volumenFinal == nil,
-                        areaCultivo == nil
+                        cantPlantasTot == nil
                     ]
                     // Calculate if all inputs are given
                     if showPlaceholder.contains(true) == false {
-                        let calculation = ((volumenInicial ?? 0.0) - (volumenFinal ?? 0.0)) * (areaCultivo ?? 0.0) / (areaAplicada ?? 1.0)
+                        let calculation = ((volumenInicial ?? 0.0) - (volumenFinal ?? 0.0)) * (cantPlantasTot ?? 0.0) / (cantPlantas ?? 1.0)
                         resultado = calculation
                     } else {
                         resultado = nil // Clear previous result if validation fails
@@ -113,7 +113,7 @@ struct fungicidas_planta: View {
             }
             .frame(maxWidth: .infinity, alignment: .trailing) // Aligns HStack to the right side of the screen
             .padding()
-            Spacer(minLength: 25)
+            Spacer(minLength: 16)
             
             // Show result
             result(resultado: resultado)
@@ -135,13 +135,8 @@ struct fungicidas_planta: View {
             Text(label)
                 .font(.custom("GlacialIndifference-Regular", size: 20.6))
                 .foregroundColor(Color(hex: "#373636"))
-            + Text(exponent)
-                .baselineOffset(6.0)
-                .font(.custom("GlacialIndifference-Regular", size: 12))
-                .foregroundColor(Color(hex: "#373636"))
-            + Text("):")
-                .font(.custom("GlacialIndifference-Regular", size: 20.6))
-                .foregroundColor(Color(hex: "#373636"))
+                .multilineTextAlignment(.center)
+                .frame(alignment: .center)
             Spacer()
             TextField(showPlaceholder[placeholderIndex] ? "Agregar Dato" : "\(hint)", text: value)
                 .keyboardType(.numberPad)
@@ -160,6 +155,28 @@ struct fungicidas_planta: View {
         .padding(.trailing, 16)
     } // InputField
     
+    // Decimal format
+    func formatNumber(_ number: Double) -> String {
+        let formatter = NumberFormatter()
+        
+        // Default style
+        formatter.numberStyle = .decimal
+        formatter.maximumFractionDigits = 3
+        
+        // Scientific notation for very small numbers
+        if abs(number) < 0.001 && number != 0 {
+            formatter.numberStyle = .scientific
+            formatter.maximumFractionDigits = 3
+        }
+        
+        // Remove decimals for integers
+        if number == floor(number) {
+            formatter.maximumFractionDigits = 0
+        }
+        
+        return formatter.string(from: NSNumber(value: number)) ?? ""
+    } // decimal format
+    
     @ViewBuilder
     func result(resultado: Double?) -> some View {
         HStack {
@@ -167,12 +184,12 @@ struct fungicidas_planta: View {
                 Image("result_shape")
                     .resizable(resizingMode: .stretch)
                     .frame(width: 208, height: 65)
-                Text(resultado != nil ? "\(resultado!)" : "Resultado")
+                Text(resultado != nil ? "\(formatNumber(resultado!))" : "Resultado")
                     .font(.custom("GlacialIndifference-Regular", size: 28.6))
                     .frame(width: 177, height: 42, alignment: .center)
                     .foregroundColor(.black)
             }
-            Text(" litros")
+            Text("litros")
                 .font(.custom("GlacialIndifference-Regular", size: 28))
                 .frame(width: 70, height: 32.5, alignment: .center)
                 .foregroundColor(.black)
@@ -183,35 +200,36 @@ struct fungicidas_planta: View {
     @ViewBuilder
     func navigationMenu() -> some View {
         // Navigation menu
-//        HStack {
-//            // Herbicidas navigation
-//            NavigationLink(destination: herbicidas(goToMenuFromHerb: $goToHerbicidasMenu), isActive: $goToHerbicidas) {
-//                Image("icon_fung2")
-//                    .resizable(resizingMode: .stretch)
-//                    .frame(width: 58.6, height: 58.6)
-//            }
-//            // Icon spacer / divider
-//            Image("icon_divider")
-//                .resizable(resizingMode: .stretch)
-//                .frame(width: 40, height: 49.4)
-//            // Fungicidas icon navigation
-//            NavigationLink(destination: fungicidas(goToMenuFromFung: $goToFungicidasMenu, goToMenuFromHerb: $goToFungicidasMenu), isActive: $goToFungicidas) {
-//                Image("icon_fung2")
-//                    .resizable(resizingMode: .stretch)
-//                    .frame(width: 58.6, height: 58.6)
-//            }
-//            // Icon spacer / divider
-//            Image("icon_divider")
-//                .resizable(resizingMode: .stretch)
-//                .frame(width: 40, height: 49.4)
-//            // Dosificacion icon navigation
-//            
-//        } // HStack
+        HStack {
+            // Herbicidas navigation
+            NavigationLink(destination: herbicidas(goToMenuFromHerb: $goToHerbicidasMenu), isActive: $goToHerbicidas) {
+                Image("icon_herb")
+                    .resizable(resizingMode: .stretch)
+                    .frame(width: 58.6, height: 58.6)
+            }
+            // Icon spacer / divider
+            Image("icon_divider")
+                .resizable(resizingMode: .stretch)
+                .frame(width: 40, height: 49.4)
+            // Fungicidas icon navigation
+            NavigationLink(destination: fungicidas(goToMenuFromHerb: $goToFungicidasMenu), isActive: $goToFungicidas) {
+                Image("icon_fung2")
+                    .resizable(resizingMode: .stretch)
+                    .frame(width: 58.6, height: 58.6)
+            }
+            // Icon spacer / divider
+            Image("icon_divider")
+                .resizable(resizingMode: .stretch)
+                .frame(width: 40, height: 49.4)
+            // Dosificacion icon navigation
+            NavigationLink(destination: dosificacion(goToHerbicidasMenu: $goToHerbicidasMenu), isActive: $goToDosificacion) {
+                Image("icon_dosi")
+                    .resizable(resizingMode: .stretch)
+                    .frame(width: 58.6, height: 58.6)
+            }
+        } // HStack
     } // NavigationMenu
 } // Fungicidas View
-
-// Allows color in hex code: "#373636"
-
 
 #Preview {
     //fungicidas_planta()

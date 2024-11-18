@@ -9,7 +9,6 @@
 import SwiftUI
 
 struct fungicidas: View {
-    // @Binding var goToMenuFromFung: Bool
     @Binding var goToMenuFromHerb: Bool
     @State private var goToMenuFung = false
     @State private var goToFungArea = false

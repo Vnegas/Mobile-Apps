@@ -1,14 +1,13 @@
 //
-//  herbicidas_vol_apl.swift
+//  dosificacion.swift
 //  Calibracion
 //
-//  Created by vnegas on 13/10/24.
-//  Copyright 2023-2024 Sebastian Venegas Brenes https://github.com/Vnegas/Mobile-Apps
+//  Created by vnegas on 17/11/24.
 //
 
 import SwiftUI
 
-struct herbicidas_vol_apl: View {
+struct dosificacion: View {
     let screenWidth = UIScreen.main.bounds.size.width;
     
     // Navigation variables
@@ -18,10 +17,13 @@ struct herbicidas_vol_apl: View {
     @State private var goToDosificacion = false
     
     // Input variables
+    @State private var volumen: Double? = nil
+    @State private var dosis: Double? = nil
     @State private var area: Double? = nil
-    @State private var volI: Double? = nil
-    @State private var volF: Double? = nil
-    @State private var resultado: Double? = nil
+    // Result variables
+    @State private var resultado1: Double? = nil
+    @State private var resultado2: Double? = nil
+    @State private var resultado3: Double? = nil
     
     // State variables to control placeholder display - See if input is already introduced
     @State private var showPlaceholder = [false, false, false]
@@ -49,59 +51,76 @@ struct herbicidas_vol_apl: View {
     
     var body: some View {
         LazyVStack {
-            Spacer(minLength: 50)
-            ZStack {
-                Image("method_title_bg")
+            Spacer(minLength: 85)
+            HStack {
+                // Herbicidas icon
+                Image("icon_dosi")
                     .resizable(resizingMode: .stretch)
-                    .frame(width: 580, height: 230)
-                VStack {
-                    // Screen Title
-                    Spacer(minLength: 30)
-                    Text("Método del volumen\naplicado en un área\nconocida")
-                        .font(.custom("GlacialIndifference-Regular", size: 31.2))
-                        .foregroundColor(.black)
-                        .frame(alignment: .center)
-                        .multilineTextAlignment(.center)
-                    // Method description
-                    Spacer(minLength: 6)
-                    Text("Determina el volumen de aplicación por hectárea. Marque un área conocida y aplique allí agua a la velocidad usual.")
-                        .font(.custom("GlacialIndifference-Regular", size: 20.8))
-                        .foregroundColor(Color(hex: "#373636"))
-                        .frame(width: 377, height: 120, alignment: .center)
-                }
+                    .frame(width: 59.8, height: 59.8)
+                // Screen Title
+                Text("Dosificación")
+                    .font(.custom("NotoSerifDisplay-ExtraCondensedItalic", size: 46))
+                    .foregroundColor(.black)
+                    .fontWeight(.bold)
             }
-            Spacer(minLength: 32)
+            
+            Spacer(minLength: 36)
             
             // First input
-            inputField("Área aplicada (m", exponent: "2", value: createBinding(for: $area, placeholderIndex: 0), placeholderIndex: 0, hint: "Área")
+            inputField("Volumen de aplicación (l/ha", value: createBinding(for: $volumen, placeholderIndex: 0), placeholderIndex: 0, hint: "Volumen")
             Spacer(minLength: 15)
             // Second input
-            inputField("Volumen inicial (litros", value: createBinding(for: $volI, placeholderIndex: 1), placeholderIndex: 1, hint: "Volumen")
-            Spacer(minLength: 15)
+            inputField("Dosis de PC por ha (litros", value: createBinding(for: $dosis, placeholderIndex: 1), placeholderIndex: 1, hint: "Dosis")
+            Spacer(minLength: 20)
+            
+            // Show result1
+            result("Resultado: PC (ml) por litro de agua", resultado: resultado1)
+            Spacer(minLength: 30)
+            
             // Third input
-            inputField("Volumen final (litros", value: createBinding(for: $volF, placeholderIndex: 2), placeholderIndex: 2, hint: "Volumen")
+            inputField("Área por aplicar (m", exponent: "2", value: createBinding(for: $area, placeholderIndex: 2), placeholderIndex: 2, hint: "Área")
+            Spacer(minLength: 20)
+            
+            // Show result2
+            result("Resultado: Agua necesaria (litros)", resultado: resultado2)
+            Spacer(minLength: 15)
+            // Show result3
+            result("Resultado: PC (ml) por área", resultado: resultado3)
             
             // Calculate button
-            Spacer(minLength: 25)
+            Spacer(minLength: 30)
             HStack {
-                Spacer() // Pushes the text to the right
+                // Instructions / Glossary
+                Text("PC = Producto Comercial\nl/ha = litros por hectárea")
+                    .font(.custom("GlacialIndifference-Regular", size: 18.2))
+                    .frame(width: 235, height: 58, alignment: .center)
+                    .foregroundColor(.black)
+                Spacer() // Pushes the button to the right
                 Button(action: {
                     // Check if any input is missing
                     showPlaceholder = [
-                        area == nil,
-                        volI == nil,
-                        volF == nil
+                        volumen == nil,
+                        dosis == nil,
+                        area == nil
                     ]
                     // Calculate if all inputs are given
                     if showPlaceholder.contains(true) == false {
-                        let calculation = (((volI ?? 0.0) - (volF ?? 0.0)) * 10000) / (area ?? 1.0)
-                        resultado = calculation
+                        let calculation1 = ((dosis ?? 0.0) / (volumen ?? 1.0)) * 1000
+                        resultado1 = calculation1
+                        
+                        let calculation2 = ((volumen ?? 0.0) * (area ?? 0.0)) / 10000
+                        resultado2 = calculation2
+                        
+                        let calculation3 = (((dosis ?? 0.0) * (area ?? 0.0)) / 10000) * 1000
+                        resultado3 = calculation3
                     } else {
-                        resultado = nil // Clear previous result if validation fails
+                        resultado1 = nil // Clear previous result if validation fails
+                        resultado2 = nil // Clear previous result if validation fails
+                        resultado3 = nil // Clear previous result if validation fails
                     }
                 }) {
                     Text("Calcular")
-                        .font(.custom("GlacialIndifference-Regular", size: 20.6))
+                        .font(.custom("GlacialIndifference-Regular", size: 18.2))
                         .frame(width: 128, height: 57.2, alignment: .center)
                         .foregroundColor(.black)
                         .background(Color.accentColor)
@@ -110,14 +129,10 @@ struct herbicidas_vol_apl: View {
             }
             .frame(maxWidth: .infinity, alignment: .trailing) // Aligns HStack to the right side of the screen
             .padding()
-            Spacer(minLength: 20)
-            
-            // Show result
-            result(resultado: resultado)
-            Spacer(minLength: 30)
+            Spacer(minLength: 35)
             
             navigationMenu()
-            Spacer(minLength: 15)
+            Spacer(minLength: 20)
             
             .navigationBarBackButtonHidden(true)
         } // LazyVStack
@@ -130,22 +145,22 @@ struct herbicidas_vol_apl: View {
     func inputField(_ label: String, exponent: String = "", value: Binding<String>, placeholderIndex: Int, hint: String) -> some View {
         HStack {
             Text(label)
-                .font(.custom("GlacialIndifference-Regular", size: 20.6))
+                .font(.custom("GlacialIndifference-Regular", size: 18.2))
                 .foregroundColor(Color(hex: "#373636"))
             + Text(exponent)
                 .baselineOffset(6.0)
-                .font(.custom("GlacialIndifference-Regular", size: 12))
+                .font(.custom("GlacialIndifference-Regular", size: 10))
                 .foregroundColor(Color(hex: "#373636"))
             + Text("):")
-                .font(.custom("GlacialIndifference-Regular", size: 20.6))
+                .font(.custom("GlacialIndifference-Regular", size: 18.2))
                 .foregroundColor(Color(hex: "#373636"))
             Spacer()
             TextField(showPlaceholder[placeholderIndex] ? "Agregar Dato" : "\(hint)", text: value)
                 .keyboardType(.numberPad)
-                .font(.custom("GlacialIndifference-Regular", size: 19))
+                .font(.custom("GlacialIndifference-Regular", size: 18.2))
                 .foregroundColor(showPlaceholder[placeholderIndex] ? Color(hex: "#68FF0000") : Color(hex: "#373636"))
                 .multilineTextAlignment(.center)
-                .frame(width: 150, height: 47, alignment: .center)
+                .frame(width: 150, height: 46, alignment: .center)
                 .background {
                     RoundedRectangle(cornerRadius: 65)
                         .fill(.white)
@@ -180,22 +195,23 @@ struct herbicidas_vol_apl: View {
     } // decimal format
     
     @ViewBuilder
-    func result(resultado: Double?) -> some View {
+    func result(_ label: String, resultado: Double?) -> some View {
         HStack {
+            Text(label)
+                .font(.custom("GlacialIndifference-Regular", size: 18.2))
+                .frame(width: 195, alignment: .center)
+                .multilineTextAlignment(.center)
+                .foregroundColor(.black)
+                .fontWeight(.bold)
             ZStack {
                 Image("result_shape")
                     .resizable(resizingMode: .stretch)
-                    .frame(width: 208, height: 65)
+                    .frame(width: 169, height: 52)
                 Text(resultado != nil ? "\(formatNumber(resultado!))" : "Resultado")
-                    .font(.custom("GlacialIndifference-Regular", size: 28.6))
-                    .frame(width: 177, height: 42, alignment: .center)
+                    .font(.custom("GlacialIndifference-Regular", size: 18.2))
+                    .frame(width: 123, height: 36.4, alignment: .center)
                     .foregroundColor(.black)
             }
-            Text("litros/ha")
-                .font(.custom("GlacialIndifference-Regular", size: 28))
-                .frame(width: 110, height: 32.5, alignment: .center)
-                .foregroundColor(.black)
-                .fontWeight(.bold)
         }
     }
     
@@ -231,8 +247,11 @@ struct herbicidas_vol_apl: View {
             }
         } // HStack
     } // NavigationMenu
-} // Herbicidas View
+} // Dosificacion View
+
+// Allows color in hex code: "#373636"
+
 
 #Preview {
-    //herbicidas_vol_apl()
+    //dosificacion()
 }

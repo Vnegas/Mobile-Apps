@@ -14,7 +14,6 @@ struct fungicidas_area: View {
     // Navigation variables
     @Binding var goToFungicidasMenu: Bool
     @Binding var goToHerbicidasMenu: Bool
-    @Binding var goToDosificacionM: Bool
     @State private var goToHerbicidas = false
     @State private var goToFungicidas = false
     @State private var goToDosificacion = false
@@ -70,6 +69,7 @@ struct fungicidas_area: View {
                         .font(.custom("GlacialIndifference-Regular", size: 24))
                         .foregroundColor(Color(hex: "#373636"))
                         .frame(width: 364, height: 120, alignment: .center)
+                        .multilineTextAlignment(.center)
                 }
             }
             Spacer(minLength: 28)
@@ -160,6 +160,28 @@ struct fungicidas_area: View {
         .padding(.trailing, 16)
     } // InputField
     
+    // Decimal format
+    func formatNumber(_ number: Double) -> String {
+        let formatter = NumberFormatter()
+        
+        // Default style
+        formatter.numberStyle = .decimal
+        formatter.maximumFractionDigits = 3
+        
+        // Scientific notation for very small numbers
+        if abs(number) < 0.001 && number != 0 {
+            formatter.numberStyle = .scientific
+            formatter.maximumFractionDigits = 3
+        }
+        
+        // Remove decimals for integers
+        if number == floor(number) {
+            formatter.maximumFractionDigits = 0
+        }
+        
+        return formatter.string(from: NSNumber(value: number)) ?? ""
+    } // decimal format
+    
     @ViewBuilder
     func result(resultado: Double?) -> some View {
         HStack {
@@ -167,12 +189,12 @@ struct fungicidas_area: View {
                 Image("result_shape")
                     .resizable(resizingMode: .stretch)
                     .frame(width: 208, height: 65)
-                Text(resultado != nil ? "\(resultado!)" : "Resultado")
+                Text(resultado != nil ? "\(formatNumber(resultado!))" : "Resultado")
                     .font(.custom("GlacialIndifference-Regular", size: 28.6))
                     .frame(width: 177, height: 42, alignment: .center)
                     .foregroundColor(.black)
             }
-            Text(" litros")
+            Text("litros")
                 .font(.custom("GlacialIndifference-Regular", size: 28))
                 .frame(width: 70, height: 32.5, alignment: .center)
                 .foregroundColor(.black)
@@ -205,7 +227,7 @@ struct fungicidas_area: View {
                 .resizable(resizingMode: .stretch)
                 .frame(width: 40, height: 49.4)
             // Dosificacion icon navigation
-            NavigationLink(destination: fungicidas_planta(goToFungicidasMenu: $goToFungicidasMenu, goToHerbicidasMenu: $goToHerbicidasMenu), isActive: $goToDosificacion) {
+            NavigationLink(destination: dosificacion(goToHerbicidasMenu: $goToHerbicidasMenu), isActive: $goToDosificacion) {
                 Image("icon_dosi")
                     .resizable(resizingMode: .stretch)
                     .frame(width: 58.6, height: 58.6)
@@ -213,33 +235,6 @@ struct fungicidas_area: View {
         } // HStack
     } // NavigationMenu
 } // Fungicidas View
-
-// Allows color in hex code: "#373636"
-extension Color {
-    init(hex: String) {
-        let hex = hex.trimmingCharacters(in: CharacterSet.alphanumerics.inverted)
-        var int: UInt64 = 0
-        Scanner(string: hex).scanHexInt64(&int)
-        let a, r, g, b: UInt64
-        switch hex.count {
-        case 3: // RGB (12-bit)
-            (a, r, g, b) = (255, (int >> 8 * 17) & 0xFF, (int >> 4 * 17) & 0xFF, (int * 17) & 0xFF)
-        case 6: // RGB (24-bit)
-            (a, r, g, b) = (255, (int >> 16) & 0xFF, (int >> 8) & 0xFF, int & 0xFF)
-        case 8: // ARGB (32-bit)
-            (a, r, g, b) = ((int >> 24) & 0xFF, (int >> 16) & 0xFF, (int >> 8) & 0xFF, int & 0xFF)
-        default:
-            (a, r, g, b) = (255, 0, 0, 0)
-        }
-        self.init(
-            .sRGB,
-            red: Double(r) / 255,
-            green: Double(g) / 255,
-            blue:  Double(b) / 255,
-            opacity: Double(a) / 255
-        )
-    }
-}
 
 #Preview {
     //fungicidas_area()

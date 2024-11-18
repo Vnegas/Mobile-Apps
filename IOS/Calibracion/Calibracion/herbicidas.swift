@@ -11,6 +11,9 @@ import SwiftUI
 struct herbicidas: View {
     @Binding var goToMenuFromHerb: Bool
     @State private var goToMenuHerb = false
+    @State private var goToHerbVel = false
+    @State private var goToHerbVolFijo = false
+    @State private var goToHerbVolApl = false
     let screenWidth = UIScreen.main.bounds.size.width;
     
     var body: some View {
@@ -37,7 +40,7 @@ struct herbicidas: View {
                 .frame(width: 338, height: 76, alignment: .center)
             Spacer(minLength: 40)
             // Button to VolumenFijo
-            NavigationLink(destination: herbicidas_vol_fijo()) {
+            NavigationLink(destination: herbicidas_vol_fijo(goToHerbicidasMenu: $goToMenuFromHerb), isActive: $goToHerbVolFijo) {
                 Text("Volumen fijo")
                     .font(.custom("GlacialIndifference-Regular", size: 27.3))
                     .frame(width: 286, height: 72, alignment: .center)
@@ -47,7 +50,7 @@ struct herbicidas: View {
             }
             Spacer(minLength: 30)
             // Button to VelocidadFija
-            NavigationLink(destination: herbicidas_vel_fija()) {
+            NavigationLink(destination: herbicidas_vel_fija(goToHerbicidasMenu: $goToMenuFromHerb), isActive: $goToHerbVel) {
                 Text("Velocidad fija")
                     .font(.custom("GlacialIndifference-Regular", size: 27.3))
                     .frame(width: 286, height: 72, alignment: .center)
@@ -57,7 +60,7 @@ struct herbicidas: View {
             }
             Spacer(minLength: 30)
             // Button to VolumenAplicado
-            NavigationLink(destination: herbicidas_vol_apl()) {
+            NavigationLink(destination: herbicidas_vol_apl(goToHerbicidasMenu: $goToMenuFromHerb), isActive: $goToHerbVolApl) {
                 Text("Volumen aplicado")
                     .font(.custom("GlacialIndifference-Regular", size: 27.3))
                     .frame(width: 286, height: 72, alignment: .center)

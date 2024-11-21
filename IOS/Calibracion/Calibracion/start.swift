@@ -94,9 +94,15 @@ struct PopupView: View {
                         .foregroundColor(.accent)
                         .cornerRadius(80)
                         .background {
-                            RoundedRectangle(cornerRadius: 80)
-                                .fill(.white)
-                                .stroke(.accent, lineWidth: 2)
+                            if #available(iOS 17.0, *) {
+                                RoundedRectangle(cornerRadius: 80)
+                                    .fill(.white)
+                                    .stroke(.accent, lineWidth: 2)
+                            } else {
+                                RoundedRectangle(cornerRadius: 80)
+                                    .fill(.white)
+                                    .border(.accent, width: 2)
+                            }
                         }
                 }
                 .padding(.trailing, 10)

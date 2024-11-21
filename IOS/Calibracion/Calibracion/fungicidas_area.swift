@@ -150,9 +150,15 @@ struct fungicidas_area: View {
                 .multilineTextAlignment(.center)
                 .frame(width: 150, height: 47, alignment: .center)
                 .background {
-                    RoundedRectangle(cornerRadius: 65)
-                        .fill(.white)
-                        .stroke(.accent, lineWidth: 2)
+                    if #available(iOS 17.0, *) {
+                        RoundedRectangle(cornerRadius: 65)
+                            .fill(.white)
+                            .stroke(.accent, lineWidth: 2)
+                    } else {
+                        RoundedRectangle(cornerRadius: 65)
+                            .fill(.white)
+                            .border(.accent, width: 2)
+                    }
                 }
         } // HStack
         .padding(.top, 10)

@@ -45,9 +45,15 @@ struct menu: View {
                             .foregroundColor(.accent)
                             .cornerRadius(80)
                     }.background {
-                        RoundedRectangle(cornerRadius: 80)
-                            .fill(.white)
-                            .stroke(.accent, lineWidth: 4)
+                        if #available(iOS 17.0, *) {
+                            RoundedRectangle(cornerRadius: 80)
+                                .fill(.white)
+                                .stroke(.accent, lineWidth: 4)
+                        } else {
+                            RoundedRectangle(cornerRadius: 80)
+                                .fill(.white)
+                                .border(.accent, width: 4)
+                        }
                     }
                     Spacer(minLength: 30)
                     // Button to Fungicidas
@@ -64,9 +70,15 @@ struct menu: View {
                             .foregroundColor(.accent)
                             .cornerRadius(80)
                     }.background {
-                        RoundedRectangle(cornerRadius: 80)
-                            .fill(.white)
-                            .stroke(.accent, lineWidth: 4)
+                        if #available(iOS 17.0, *) {
+                            RoundedRectangle(cornerRadius: 80)
+                                .fill(.white)
+                                .stroke(.accent, lineWidth: 4)
+                        } else {
+                            RoundedRectangle(cornerRadius: 80)
+                                .fill(.white)
+                                .border(.accent, width: 4)
+                        }
                     }
                     Spacer(minLength: 30)
                     // Button to Dosificacion
@@ -83,9 +95,15 @@ struct menu: View {
                             .foregroundColor(.accent)
                             .cornerRadius(80)
                     }.background {
-                        RoundedRectangle(cornerRadius: 80)
-                            .fill(.white)
-                            .stroke(.accent, lineWidth: 4)
+                        if #available(iOS 17.0, *) {
+                            RoundedRectangle(cornerRadius: 80)
+                                .fill(.white)
+                                .stroke(.accent, lineWidth: 4)
+                        } else {
+                            RoundedRectangle(cornerRadius: 80)
+                                .fill(.white)
+                                .border(.accent, width: 4)
+                        }
                     }
                     Spacer(minLength: 70)
                     HStack {

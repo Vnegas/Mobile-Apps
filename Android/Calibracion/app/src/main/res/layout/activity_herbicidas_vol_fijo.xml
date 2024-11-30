@@ -10,10 +10,10 @@
 
     <ImageView
         android:id="@+id/imageView5"
-        android:layout_width="532dp"
-        android:layout_height="210dp"
+        android:layout_width="@dimen/_400sdp"
+        android:layout_height="@dimen/_150sdp"
         android:contentDescription="@string/method_title_background"
-        app:layout_constraintBottom_toTopOf="@+id/textDescarga"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.504"
         app:layout_constraintStart_toStartOf="parent"
@@ -21,157 +21,187 @@
         app:layout_constraintVertical_bias="0.0"
         app:srcCompat="@drawable/method_title_bg" />
 
-    <TextView
-        android:id="@+id/textMetodo"
-        android:layout_width="@dimen/_260sdp"
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/method"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginStart="@dimen/_15sdp"
-        android:layout_marginTop="@dimen/_40sdp"
-        android:layout_marginEnd="@dimen/_16sdp"
-        android:layout_marginBottom="@dimen/_15sdp"
-        android:fontFamily="@font/glacial"
-        android:text="Método del volumen fijo"
-        android:textColor="@color/black"
-        android:textSize="@dimen/_25sdp"
-        android:textStyle="bold"
-        app:layout_constraintBottom_toTopOf="@+id/textDescripcion"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.7" />
+        app:layout_constraintBottom_toBottomOf="@+id/firstInput"
+        app:layout_constraintVertical_bias="0.3">
+        <TextView
+            android:id="@+id/textMetodo"
+            android:layout_width="@dimen/_260sdp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/_15sdp"
+            android:layout_marginEnd="@dimen/_16sdp"
+            android:layout_marginBottom="@dimen/_16sdp"
+            android:fontFamily="@font/glacial"
+            android:text="Método del volumen fijo"
+            android:textColor="@color/black"
+            android:textSize="@dimen/_25sdp"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toTopOf="@+id/textDescripcion"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.7" />
 
-    <TextView
-        android:id="@+id/textDescripcion"
-        android:layout_width="@dimen/_268sdp"
-        android:layout_height="@dimen/_72sdp"
-        android:layout_marginStart="@dimen/_20sdp"
-        android:layout_marginEnd="@dimen/_20sdp"
-        android:layout_marginBottom="@dimen/_410sdp"
-        android:fontFamily="@font/glacial"
-        android:gravity="center"
-        android:text="Determina a qué velocidad se debe avanzar para aplicar el volumen de caldo deseado."
-        android:textColor="@color/black"
-        android:textSize="@dimen/_18sdp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.454"
-        app:layout_constraintStart_toStartOf="parent" />
+        <TextView
+            android:id="@+id/textDescripcion"
+            android:layout_width="@dimen/_268sdp"
+            android:layout_height="@dimen/_72sdp"
+            android:layout_marginStart="@dimen/_20sdp"
+            android:layout_marginEnd="@dimen/_20sdp"
+            android:fontFamily="@font/glacial"
+            android:gravity="center"
+            android:text="Determina a qué velocidad se debe avanzar para aplicar el volumen de caldo deseado."
+            android:textColor="@color/black"
+            android:textSize="@dimen/_17sdp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.454"
+            app:layout_constraintStart_toStartOf="parent" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
-    <TextView
-        android:id="@+id/textDescarga"
-        android:layout_width="@dimen/_165sdp"
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/firstInput"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginStart="@dimen/_30sdp"
-        android:layout_marginTop="@dimen/_18sdp"
-        android:layout_marginEnd="@dimen/_4sdp"
-        android:fontFamily="@font/glacial"
-        android:gravity="center"
-        android:text="Descarga por boquilla en 1 minuto (litros):"
-        android:textColor="@color/black"
-        android:textSize="@dimen/_16sdp"
-        app:layout_constraintBottom_toTopOf="@id/textAncho"
-        app:layout_constraintEnd_toStartOf="@+id/inputDescarga"
+        android:layout_marginTop="@dimen/_8sdp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textDescripcion" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/imageView5"
+        app:layout_constraintBottom_toTopOf="@+id/secondInput">
+        <TextView
+            android:id="@+id/textDescarga"
+            android:layout_width="@dimen/_165sdp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/_30sdp"
+            android:layout_marginEnd="@dimen/_4sdp"
+            android:fontFamily="@font/glacial"
+            android:gravity="center"
+            android:text="Descarga por boquilla en 1 minuto (litros):"
+            android:textColor="@color/black"
+            android:textSize="@dimen/_16sdp"
+            app:layout_constraintBottom_toBottomOf="@id/firstInput"
+            app:layout_constraintTop_toTopOf="@+id/firstInput"
+            app:layout_constraintEnd_toStartOf="@+id/inputDescarga"
+            app:layout_constraintStart_toStartOf="parent" />
 
-    <TextView
-        android:id="@+id/textAncho"
-        android:layout_width="@dimen/_165sdp"
+        <EditText
+            android:id="@+id/inputDescarga"
+            android:layout_width="@dimen/_115sdp"
+            android:layout_height="@dimen/_40sdp"
+            android:layout_marginStart="@dimen/_4sdp"
+            android:layout_marginEnd="@dimen/_30sdp"
+            android:background="@drawable/edit_text_rounded"
+            android:digits="0123456789."
+            android:fontFamily="@font/glacial"
+            android:gravity="center"
+            android:hint="Descarga"
+            android:inputType="numberDecimal"
+            android:textColor="@color/black"
+            android:textColorHint="#B7373636"
+            android:textSize="@dimen/_14sdp"
+            app:layout_constraintBottom_toBottomOf="@id/firstInput"
+            app:layout_constraintTop_toTopOf="@+id/firstInput"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/textDescarga" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/secondInput"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginStart="@dimen/_30sdp"
-        android:layout_marginEnd="@dimen/_4sdp"
-        android:fontFamily="@font/glacial"
-        android:gravity="center"
-        android:text="Ancho de franja o distancia entre boquillas (metros):"
-        android:textColor="@color/black"
-        android:textSize="@dimen/_16sdp"
-        app:layout_constraintBottom_toTopOf="@+id/textVolAplic"
-        app:layout_constraintEnd_toStartOf="@+id/inputAncho"
+        android:layout_marginTop="@dimen/_8sdp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textDescarga" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/firstInput"
+        app:layout_constraintBottom_toTopOf="@+id/thirdInput">
+        <TextView
+            android:id="@+id/textAncho"
+            android:layout_width="@dimen/_165sdp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/_30sdp"
+            android:layout_marginEnd="@dimen/_4sdp"
+            android:fontFamily="@font/glacial"
+            android:gravity="center"
+            android:text="Ancho de franja o distancia entre boquillas (metros):"
+            android:textColor="@color/black"
+            android:textSize="@dimen/_16sdp"
+            app:layout_constraintBottom_toBottomOf="@id/secondInput"
+            app:layout_constraintTop_toTopOf="@+id/secondInput"
+            app:layout_constraintEnd_toStartOf="@+id/inputAncho"
+            app:layout_constraintStart_toStartOf="parent" />
 
-    <TextView
-        android:id="@+id/textVolAplic"
-        android:layout_width="@dimen/_165sdp"
+        <EditText
+            android:id="@+id/inputAncho"
+            android:layout_width="@dimen/_115sdp"
+            android:layout_height="@dimen/_40sdp"
+            android:layout_marginStart="@dimen/_4sdp"
+            android:layout_marginEnd="@dimen/_30sdp"
+            android:background="@drawable/edit_text_rounded"
+            android:digits="0123456789."
+            android:fontFamily="@font/glacial"
+            android:gravity="center"
+            android:hint="Distancia"
+            android:inputType="numberDecimal"
+            android:textColor="@color/black"
+            android:textColorHint="#B7373636"
+            android:textSize="@dimen/_14sdp"
+            app:layout_constraintBottom_toBottomOf="@id/secondInput"
+            app:layout_constraintTop_toTopOf="@+id/secondInput"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/textAncho" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/thirdInput"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginStart="@dimen/_30sdp"
-        android:layout_marginEnd="@dimen/_4sdp"
-        android:layout_marginBottom="@dimen/_64sdp"
-        android:fontFamily="@font/glacial"
-        android:gravity="center"
-        android:text="Volumen de aplicación por hectárea (litros):"
-        android:textColor="@color/black"
-        android:textSize="@dimen/_16sdp"
-        app:layout_constraintBottom_toTopOf="@+id/textResultado"
-        app:layout_constraintEnd_toStartOf="@+id/inputVolAplic"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/textAncho" />
+        android:layout_marginTop="@dimen/_8sdp"
+        app:layout_constraintTop_toBottomOf="@+id/secondInput"
+        app:layout_constraintBottom_toTopOf="@+id/buttonCalcular">
+        <TextView
+            android:id="@+id/textVolAplic"
+            android:layout_width="@dimen/_165sdp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/_30sdp"
+            android:layout_marginEnd="@dimen/_4sdp"
+            android:fontFamily="@font/glacial"
+            android:gravity="center"
+            android:text="Volumen de aplicación por hectárea (litros):"
+            android:textColor="@color/black"
+            android:textSize="@dimen/_16sdp"
+            app:layout_constraintBottom_toBottomOf="@id/thirdInput"
+            app:layout_constraintTop_toTopOf="@+id/thirdInput"
+            app:layout_constraintEnd_toStartOf="@+id/inputVolAplic"
+            app:layout_constraintStart_toStartOf="parent" />
 
-    <EditText
-        android:id="@+id/inputDescarga"
-        android:layout_width="@dimen/_115sdp"
-        android:layout_height="@dimen/_40sdp"
-        android:layout_marginStart="@dimen/_4sdp"
-        android:layout_marginTop="@dimen/_32sdp"
-        android:layout_marginEnd="@dimen/_30sdp"
-        android:background="@drawable/edit_text_rounded"
-        android:digits="0123456789."
-        android:fontFamily="@font/glacial"
-        android:gravity="center"
-        android:hint="Descarga"
-        android:inputType="numberDecimal"
-        android:textColor="@color/black"
-        android:textColorHint="#B7373636"
-        android:textSize="@dimen/_14sdp"
-        app:layout_constraintBottom_toTopOf="@+id/inputAncho"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/textDescarga"
-        app:layout_constraintTop_toBottomOf="@+id/textDescripcion" />
-
-    <EditText
-        android:id="@+id/inputAncho"
-        android:layout_width="@dimen/_115sdp"
-        android:layout_height="@dimen/_40sdp"
-        android:layout_marginStart="@dimen/_4sdp"
-        android:layout_marginTop="@dimen/_20sdp"
-        android:layout_marginEnd="@dimen/_30sdp"
-        android:layout_marginBottom="@dimen/_7sdp"
-        android:background="@drawable/edit_text_rounded"
-        android:digits="0123456789."
-        android:fontFamily="@font/glacial"
-        android:gravity="center"
-        android:hint="Distancia"
-        android:inputType="numberDecimal"
-        android:textColor="@color/black"
-        android:textColorHint="#B7373636"
-        android:textSize="@dimen/_14sdp"
-        app:layout_constraintBottom_toTopOf="@+id/inputVolAplic"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/textAncho"
-        app:layout_constraintTop_toBottomOf="@id/inputDescarga" />
-
-    <EditText
-        android:id="@+id/inputVolAplic"
-        android:layout_width="@dimen/_115sdp"
-        android:layout_height="@dimen/_40sdp"
-        android:layout_marginStart="@dimen/_4sdp"
-        android:layout_marginTop="@dimen/_10sdp"
-        android:layout_marginEnd="@dimen/_30sdp"
-        android:layout_marginBottom="@dimen/_10sdp"
-        android:background="@drawable/edit_text_rounded"
-        android:digits="0123456789."
-        android:fontFamily="@font/glacial"
-        android:gravity="center"
-        android:hint="@string/volumen"
-        android:inputType="numberDecimal"
-        android:textColor="@color/black"
-        android:textColorHint="#B7373636"
-        android:textSize="@dimen/_14sdp"
-        app:layout_constraintBottom_toTopOf="@+id/buttonCalcular"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/textVolAplic"
-        app:layout_constraintTop_toBottomOf="@id/inputAncho" />
+        <EditText
+            android:id="@+id/inputVolAplic"
+            android:layout_width="@dimen/_115sdp"
+            android:layout_height="@dimen/_40sdp"
+            android:layout_marginStart="@dimen/_4sdp"
+            android:layout_marginEnd="@dimen/_30sdp"
+            android:background="@drawable/edit_text_rounded"
+            android:digits="0123456789."
+            android:fontFamily="@font/glacial"
+            android:gravity="center"
+            android:hint="@string/volumen"
+            android:inputType="numberDecimal"
+            android:textColor="@color/black"
+            android:textColorHint="#B7373636"
+            android:textSize="@dimen/_14sdp"
+            app:layout_constraintBottom_toBottomOf="@id/thirdInput"
+            app:layout_constraintTop_toTopOf="@+id/thirdInput"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/textVolAplic" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
     <Button
         android:id="@+id/buttonCalcular"
@@ -179,122 +209,142 @@
         android:layout_height="@dimen/_44sdp"
         android:layout_marginStart="@dimen/_198sdp"
         android:layout_marginEnd="@dimen/_28sdp"
-        android:layout_marginBottom="@dimen/_30sdp"
+        android:layout_marginTop="@dimen/_10sdp"
+        android:layout_marginBottom="@dimen/_10sdp"
         android:background="@drawable/rounded_button"
         android:fontFamily="@font/glacial"
         android:text="@string/calcular"
         android:textColor="@color/black"
         android:textSize="@dimen/_16sdp"
         app:backgroundTint="#7C9A63"
-        app:layout_constraintBottom_toTopOf="@+id/spinner"
+        app:layout_constraintTop_toBottomOf="@id/thirdInput"
+        app:layout_constraintBottom_toTopOf="@+id/result"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent" />
 
-    <ImageView
-        android:id="@+id/imageResultShape"
-        android:layout_width="@dimen/_150sdp"
-        android:layout_height="@dimen/_50sdp"
-        android:layout_marginBottom="@dimen/_70sdp"
-        android:contentDescription="Result shape image"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.38"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintVertical_bias="0.228"
-        app:srcCompat="@drawable/result_shape" />
-
-    <TextView
-        android:id="@+id/textResultado"
-        android:layout_width="@dimen/_136sdp"
-        android:layout_height="@dimen/_32sdp"
-        android:fontFamily="@font/glacial"
-        android:gravity="center"
-        android:text="@string/resultado"
-        android:textColor="@color/black"
-        android:textSize="@dimen/_22sdp"
-        app:layout_constraintBottom_toBottomOf="@+id/imageResultShape"
-        app:layout_constraintEnd_toEndOf="@+id/imageResultShape"
-        app:layout_constraintStart_toStartOf="@+id/imageResultShape"
-        app:layout_constraintTop_toTopOf="@+id/imageResultShape" />
-
-    <Spinner
-        android:id="@+id/spinner"
-        android:layout_width="@dimen/_86sdp"
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/result"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="@dimen/_5sdp"
-        android:layout_marginBottom="@dimen/_80sdp"
-        android:theme="@android:style/Theme.Holo.Light.DarkActionBar"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.869"
-        app:layout_constraintStart_toEndOf="@+id/imageResultShape" />
+        app:layout_constraintBottom_toTopOf="@id/navBar"
+        app:layout_constraintTop_toBottomOf="@+id/buttonCalcular" >
 
-    <ImageView
-        android:id="@+id/imageHerbIcon"
-        android:layout_width="@dimen/_45sdp"
-        android:layout_height="@dimen/_45sdp"
-        android:layout_marginStart="@dimen/_12sdp"
-        android:contentDescription="@string/herbicidas_logo"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/imageDivider1"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageResultShape"
-        app:layout_constraintVertical_bias="0.8"
-        app:srcCompat="@drawable/icon_herb" />
+        <ImageView
+            android:id="@+id/imageResultShape"
+            android:layout_width="@dimen/_150sdp"
+            android:layout_height="@dimen/_50sdp"
+            android:contentDescription="Result shape image"
+            app:layout_constraintBottom_toBottomOf="@+id/result"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.38"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/result"
+            app:layout_constraintVertical_bias="0.228"
+            app:srcCompat="@drawable/result_shape" />
 
-    <ImageView
-        android:id="@+id/imageFungIcon"
-        android:layout_width="@dimen/_45sdp"
-        android:layout_height="@dimen/_45sdp"
-        android:contentDescription="@string/fungicidas_e_insecticidas_logo"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/imageDivider2"
-        app:layout_constraintStart_toEndOf="@id/imageDivider1"
-        app:layout_constraintTop_toBottomOf="@+id/imageResultShape"
-        app:layout_constraintVertical_bias="0.8"
-        app:srcCompat="@drawable/icon_fung2" />
+        <TextView
+            android:id="@+id/textResultado"
+            android:layout_width="@dimen/_136sdp"
+            android:layout_height="@dimen/_32sdp"
+            android:fontFamily="@font/glacial"
+            android:gravity="center"
+            android:text="@string/resultado"
+            android:textColor="@color/black"
+            android:textSize="@dimen/_21sdp"
+            app:layout_constraintBottom_toBottomOf="@+id/imageResultShape"
+            app:layout_constraintEnd_toEndOf="@+id/imageResultShape"
+            app:layout_constraintStart_toStartOf="@+id/imageResultShape"
+            app:layout_constraintTop_toTopOf="@+id/imageResultShape" />
 
-    <ImageView
-        android:id="@+id/imageDosIcon"
-        android:layout_width="@dimen/_45sdp"
-        android:layout_height="@dimen/_45sdp"
-        android:layout_marginEnd="@dimen/_12sdp"
-        android:contentDescription="@string/dosificacion_logo"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.519"
-        app:layout_constraintStart_toEndOf="@id/imageDivider2"
-        app:layout_constraintTop_toBottomOf="@+id/imageResultShape"
-        app:layout_constraintVertical_bias="0.8"
-        app:srcCompat="@drawable/icon_dosi" />
+        <Spinner
+            android:id="@+id/spinner"
+            android:layout_width="@dimen/_86sdp"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="@dimen/_5sdp"
+            android:theme="@android:style/Theme.Holo.Light.DarkActionBar"
+            app:layout_constraintBottom_toBottomOf="@+id/result"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.869"
+            app:layout_constraintStart_toEndOf="@+id/imageResultShape"
+            app:layout_constraintTop_toTopOf="@+id/result" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
-    <ImageView
-        android:id="@+id/imageDivider1"
-        android:layout_width="@dimen/_40sdp"
-        android:layout_height="@dimen/_38sdp"
-        android:contentDescription="Divider of icon panel"
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/navBar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/_8sdp"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/imageFungIcon"
-        app:layout_constraintHorizontal_bias="0.509"
-        app:layout_constraintStart_toEndOf="@+id/imageHerbIcon"
-        app:layout_constraintTop_toBottomOf="@+id/imageResultShape"
-        app:layout_constraintVertical_bias="0.75"
-        app:srcCompat="@drawable/icon_divider" />
+        app:layout_constraintTop_toBottomOf="@+id/result"
+        app:layout_constraintVertical_bias="1.0"
+        tools:layout_editor_absoluteX="135dp">
+        <ImageView
+            android:id="@+id/imageHerbIcon"
+            android:layout_width="@dimen/_40sdp"
+            android:layout_height="@dimen/_40sdp"
+            android:layout_marginStart="@dimen/_12sdp"
+            android:contentDescription="@string/herbicidas_logo"
+            app:layout_constraintBottom_toBottomOf="@+id/navBar"
+            app:layout_constraintTop_toTopOf="@+id/navBar"
+            app:layout_constraintEnd_toStartOf="@+id/imageDivider1"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintVertical_bias="0.8"
+            app:srcCompat="@drawable/icon_herb" />
 
-    <ImageView
-        android:id="@+id/imageDivider2"
-        android:layout_width="@dimen/_40sdp"
-        android:layout_height="@dimen/_38sdp"
-        android:contentDescription="Divider of icon panel"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/imageDosIcon"
-        app:layout_constraintHorizontal_bias="0.499"
-        app:layout_constraintStart_toEndOf="@+id/imageFungIcon"
-        app:layout_constraintTop_toBottomOf="@+id/imageResultShape"
-        app:layout_constraintVertical_bias="0.75"
-        app:srcCompat="@drawable/icon_divider" />
+        <ImageView
+            android:id="@+id/imageFungIcon"
+            android:layout_width="@dimen/_40sdp"
+            android:layout_height="@dimen/_40sdp"
+            android:contentDescription="@string/fungicidas_e_insecticidas_logo"
+            app:layout_constraintBottom_toBottomOf="@+id/navBar"
+            app:layout_constraintEnd_toStartOf="@+id/imageDivider2"
+            app:layout_constraintStart_toEndOf="@id/imageDivider1"
+            app:layout_constraintTop_toTopOf="@+id/navBar"
+            app:layout_constraintVertical_bias="0.8"
+            app:srcCompat="@drawable/icon_fung2" />
+
+        <ImageView
+            android:id="@+id/imageDosIcon"
+            android:layout_width="@dimen/_40sdp"
+            android:layout_height="@dimen/_40sdp"
+            android:layout_marginEnd="@dimen/_12sdp"
+            android:contentDescription="@string/dosificacion_logo"
+            app:layout_constraintBottom_toBottomOf="@+id/navBar"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.519"
+            app:layout_constraintStart_toEndOf="@id/imageDivider2"
+            app:layout_constraintTop_toTopOf="@+id/navBar"
+            app:layout_constraintVertical_bias="0.8"
+            app:srcCompat="@drawable/icon_dosi" />
+
+        <ImageView
+            android:id="@+id/imageDivider1"
+            android:layout_width="@dimen/_40sdp"
+            android:layout_height="@dimen/_38sdp"
+            android:contentDescription="Divider of icon panel"
+            app:layout_constraintBottom_toBottomOf="@+id/navBar"
+            app:layout_constraintEnd_toStartOf="@+id/imageFungIcon"
+            app:layout_constraintHorizontal_bias="0.509"
+            app:layout_constraintStart_toEndOf="@+id/imageHerbIcon"
+            app:layout_constraintTop_toTopOf="@+id/navBar"
+            app:layout_constraintVertical_bias="0.75"
+            app:srcCompat="@drawable/icon_divider" />
+
+        <ImageView
+            android:id="@+id/imageDivider2"
+            android:layout_width="@dimen/_40sdp"
+            android:layout_height="@dimen/_38sdp"
+            android:contentDescription="Divider of icon panel"
+            app:layout_constraintBottom_toBottomOf="@+id/navBar"
+            app:layout_constraintEnd_toStartOf="@+id/imageDosIcon"
+            app:layout_constraintHorizontal_bias="0.499"
+            app:layout_constraintStart_toEndOf="@+id/imageFungIcon"
+            app:layout_constraintTop_toTopOf="@+id/navBar"
+            app:layout_constraintVertical_bias="0.75"
+            app:srcCompat="@drawable/icon_divider" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
 <!--Copyright 2023-2024 Sebastian Venegas Brenes https://github.com/Vnegas/Mobile-Apps -->

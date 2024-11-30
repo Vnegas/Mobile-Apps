@@ -4,6 +4,7 @@ package com.example.calibracion;
 import android.app.Dialog;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.DisplayMetrics;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
@@ -47,6 +48,16 @@ public class MainActivity extends AppCompatActivity {
         dialog.show();
 
         entrar = (Button) findViewById(R.id.buttonEntrar);
+        // set entrar button to screen width
+        DisplayMetrics displayMetrics = new DisplayMetrics();
+        getWindowManager().getDefaultDisplay().getMetrics(displayMetrics);
+        int width = displayMetrics.widthPixels;
+
+        // Create LayoutParams with the desired width
+        ViewGroup.LayoutParams params = entrar.getLayoutParams();
+        params.width = width;
+        entrar.setLayoutParams(params);
+
         entrar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

@@ -4,8 +4,11 @@ package com.example.calibracion;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
+import android.util.DisplayMetrics;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.activity.EdgeToEdge;
@@ -15,7 +18,7 @@ import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
 public class menu extends AppCompatActivity {
-
+    ImageView background;
     Button herbicidas;
     Button fungicidas;
     Button dosificacion;
@@ -84,6 +87,21 @@ public class menu extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+
+        background = findViewById(R.id.imageView);
+
+        // set background image to screen width and height
+        DisplayMetrics displayMetrics = new DisplayMetrics();
+        getWindowManager().getDefaultDisplay().getMetrics(displayMetrics);
+        int height = displayMetrics.heightPixels;
+        int width = displayMetrics.widthPixels;
+
+        // Create LayoutParams with the desired width
+        ViewGroup.LayoutParams params = background.getLayoutParams();
+//        params.height = (height / 4);
+//        params.width = width + (width / 4);
+//        background.setLayoutParams(params);
+
     }
 
     private void goToUrl(String s) {

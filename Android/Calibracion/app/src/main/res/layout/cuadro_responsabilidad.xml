@@ -10,8 +10,8 @@
     android:backgroundTint="@color/white">
 
     <androidx.constraintlayout.widget.ConstraintLayout
-        android:layout_width="383dp"
-        android:layout_height="350dp"
+        android:layout_width="@dimen/_296sdp"
+        android:layout_height="@dimen/_270sdp"
         android:backgroundTint="@color/white">
 
         <TextView

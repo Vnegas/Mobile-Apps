@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/light_gray"
-    tools:context="com.example.calibracion.herbicidas_vol_apl">
+    tools:context="ucr.eefbm.calibracion.herbicidas_vol_apl">
 
     <ImageView
         android:id="@+id/imageView5"

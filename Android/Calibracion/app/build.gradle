@@ -3,11 +3,11 @@ plugins {
 }
 
 android {
-    namespace 'com.example.calibracion'
+    namespace 'ucr.eefbm.calibracion'
     compileSdk 34
 
     defaultConfig {
-        applicationId "com.example.calibracion"
+        applicationId "ucr.eefbm.calibracion"
         minSdk 24
         targetSdk 34
         versionCode 1

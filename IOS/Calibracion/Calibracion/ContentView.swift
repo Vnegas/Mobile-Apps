@@ -3,7 +3,7 @@
 //  Calibracion
 //
 //  Created by vnegas on 25/9/24.
-//  Copyright 2023-2024 Sebastian Venegas Brenes https://github.com/Vnegas/Mobile-Apps
+//  Copyright 2023-2024-2025 Sebastian Venegas Brenes https://github.com/Vnegas/Mobile-Apps
 //
 
 import SwiftUI
@@ -13,126 +13,90 @@ struct menu: View {
     @State private var goToHerbicidas = false
     @State private var goToFungicidas = false
     @State private var goToDosificacion = false
-    let screenWidth = UIScreen.main.bounds.size.width;
+
     var body: some View {
         NavigationView {
-            ZStack {
-                Image("menu_bg")
-                    .resizable(resizingMode: .stretch)
-                    .aspectRatio(contentMode: .fill)
-                    .frame(width: /*@START_MENU_TOKEN@*/500.0/*@END_MENU_TOKEN@*/, height: 980.0)
-                    
-                LazyVStack {
-                    // Title
-                    Text("Calibración")
-                        .foregroundColor(.white)
-                        .font(.custom("NotoSerifDisplay-ExtraCondensedItalic", size: 57.2))
-                        .fontWeight(.bold)
-                        .padding()
-                    Spacer(minLength: 50)
-                    // Button to Herbicidas
-                    NavigationLink(destination: herbicidas(goToMenuFromHerb: $goToHerbicidas), isActive: $goToHerbicidas) {
-                        // Herbicidas icon
-                        Image("icon_herb")
-                            .resizable(resizingMode: .stretch)
-                            .offset(x: 20)
-                            .frame(width: 50.4, height: 43.9)
-                        
-                        Text("HERBICIDAS")
-                            .font(.custom("GlacialIndifference-Regular", size: 31.2))
-                            .padding(.trailing, 18.0)
-                            .frame(width: 240, height: 104, alignment: .center)
-                            .foregroundColor(.accent)
-                            .cornerRadius(80)
-                    }.background {
-                        if #available(iOS 17.0, *) {
-                            RoundedRectangle(cornerRadius: 80)
-                                .fill(.white)
-                                .stroke(.accent, lineWidth: 4)
-                        } else {
-                            RoundedRectangle(cornerRadius: 80)
-                                .fill(.white)
-                                .border(.accent, width: 4)
+            GeometryReader { geometry in
+                ZStack {
+                    // Background Image
+                    Image("menu_bg")
+                        .resizable()
+                        .aspectRatio(contentMode: .fill)
+                        .scaledToFill()
+                        .frame(width: geometry.size.width, height: geometry.size.height * 1.2)
+                        .edgesIgnoringSafeArea(.all)
+
+                    VStack(spacing: geometry.size.height * 0.05) {
+                        // Title
+                        Text("Calibración")
+                            .foregroundColor(.white)
+                            .font(.custom("NotoSerifDisplay-ExtraCondensedItalic", size: geometry.size.width * 0.12))
+                            .fontWeight(.bold)
+                            .padding(.top, geometry.size.height * 0.12)
+
+                        // Buttons
+                        menuButton(title: "HERBICIDAS", icon: "icon_herb", isActive: $goToHerbicidas, destination: herbicidas(goToMenuFromHerb: $goToHerbicidas), geometry: geometry)
+
+                        menuButton(title: "FUNGICIDAS E INSECTICIDAS", icon: "icon_fung2", isActive: $goToFungicidas, destination: fungicidas(goToMenuFromHerb: $goToHerbicidas), geometry: geometry)
+
+                        menuButton(title: "DOSIFICACIÓN", icon: "icon_dosi", isActive: $goToDosificacion, destination: dosificacion(goToHerbicidasMenu: $goToHerbicidas), geometry: geometry)
+
+                        Spacer(minLength: geometry.size.height * 0.1)
+
+                        // Navigation links
+                        HStack {
+                            Text("ATRÁS")
+                                .font(.custom("GlacialIndifference-Regular", size: geometry.size.width * 0.06))
+                                .foregroundColor(.black)
+                                .onTapGesture {
+                                    goToStart = false
+                                }
+                            Spacer()
+                            Link("AYUDA", destination: URL(string: "https://www.youtube.com/watch?v=ufisItmEEpU&ab_channel=Malezas%26Arvenses")!)
+                                .font(.custom("GlacialIndifference-Regular", size: geometry.size.width * 0.06))
+                                .foregroundColor(.black)
                         }
+                        .padding(.horizontal, geometry.size.width * 0.1)
+                        .frame(maxWidth: .infinity)
                     }
-                    Spacer(minLength: 30)
-                    // Button to Fungicidas
-                    NavigationLink(destination: fungicidas(goToMenuFromHerb: $goToHerbicidas), isActive: $goToFungicidas) {
-                        // Herbicidas icon
-                        Image("icon_fung2")
-                            .resizable(resizingMode: .stretch)
-                            .offset(x: 20)
-                            .frame(width: 44.4, height: 40.9)
-                        
-                        Text("FUNGICIDAS E INSECTICIDAS")
-                            .font(.custom("GlacialIndifference-Regular", size: 31.2))
-                            .frame(width: 240, height: 104, alignment: .center)
-                            .foregroundColor(.accent)
-                            .cornerRadius(80)
-                    }.background {
-                        if #available(iOS 17.0, *) {
-                            RoundedRectangle(cornerRadius: 80)
-                                .fill(.white)
-                                .stroke(.accent, lineWidth: 4)
-                        } else {
-                            RoundedRectangle(cornerRadius: 80)
-                                .fill(.white)
-                                .border(.accent, width: 4)
-                        }
-                    }
-                    Spacer(minLength: 30)
-                    // Button to Dosificacion
-                    NavigationLink(destination: dosificacion(goToHerbicidasMenu: $goToHerbicidas), isActive: $goToDosificacion) {
-                        // Herbicidas icon
-                        Image("icon_dosi")
-                            .resizable(resizingMode: .stretch)
-                            .offset(x: 20)
-                            .frame(width: 44.4, height: 40.9)
-                        
-                        Text("DOSIFICACIÓN")
-                            .font(.custom("GlacialIndifference-Regular", size: 31.2))
-                            .frame(width: 240, height: 104, alignment: .center)
-                            .foregroundColor(.accent)
-                            .cornerRadius(80)
-                    }.background {
-                        if #available(iOS 17.0, *) {
-                            RoundedRectangle(cornerRadius: 80)
-                                .fill(.white)
-                                .stroke(.accent, lineWidth: 4)
-                        } else {
-                            RoundedRectangle(cornerRadius: 80)
-                                .fill(.white)
-                                .border(.accent, width: 4)
-                        }
-                    }
-                    Spacer(minLength: 70)
-                    HStack {
-                        // Button to go back
-                        Text("ATRÁS")
-                            .font(.custom("GlacialIndifference-Regular", size: 28.6))
-                            .foregroundColor(.black)
-                            .multilineTextAlignment(.leading)
-                            .onTapGesture {
-                                goToStart = false
-                            }
-                        Spacer(minLength: 5)
-                        // Button to go to Youtube video for help
-                        Link("AYUDA", destination: URL(string: "https://www.youtube.com/watch?v=ufisItmEEpU&ab_channel=Malezas%26Arvenses")!)
-                            .font(.custom("GlacialIndifference-Regular", size: 28.6))
-                            .foregroundColor(.black)
-                            .multilineTextAlignment(.trailing)
-                    }.frame(width: screenWidth - 80, height: 34)
-                    Spacer()
+                    .padding(.bottom, geometry.size.height * 0.27)
                 }
             }
         }
-        // Default back button disabled
+        .navigationViewStyle(.stack) // Forces full-screen mode on iPad
         .navigationBarBackButtonHidden(true)
     }
 }
 
+// Reusable button for menu items
+func menuButton<Destination: View>(title: String, icon: String, isActive: Binding<Bool>, destination: Destination, geometry: GeometryProxy) -> some View {
+    NavigationLink(destination: destination, isActive: isActive) {
+        HStack {
+            Image(icon)
+                .resizable()
+                .scaledToFit()
+                .frame(width: geometry.size.width * 0.12, height: geometry.size.width * 0.1)
+                .padding(.leading, geometry.size.width * 0.05)
+            
+            Text(title)
+                .font(.custom("GlacialIndifference-Regular", size: geometry.size.width * 0.06))
+                .foregroundColor(.black)
+                .multilineTextAlignment(.center)
+                .fixedSize(horizontal: false, vertical: true)
+                .frame(maxWidth: .infinity)
+        }
+        .frame(width: geometry.size.width * 0.65, height: geometry.size.height * 0.1)
+        .background(
+            RoundedRectangle(cornerRadius: 80)
+                .fill(Color.white)
+                .overlay(RoundedRectangle(cornerRadius: 80).stroke(Color.accentColor, lineWidth: 4))
+        )
+    }
+}
+
+// Preview
 #Preview {
-    //menu()
+    menu(goToStart: .constant(true))
 }
 
 // Allows color in hex code: "#373636"

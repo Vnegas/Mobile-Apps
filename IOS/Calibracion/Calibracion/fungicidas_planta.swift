@@ -35,7 +35,7 @@ struct fungicidas_planta: View {
                     Image("method_title_bg")
                         .resizable()
                         .scaledToFit()
-                        .frame(width: geometry.size.width * 2, height: geometry.size.height * 0.3)
+                        .frame(width: geometry.size.width, height: geometry.size.height * 0.3)
                     
                     VStack {
                         Text("Planta")
@@ -50,7 +50,7 @@ struct fungicidas_planta: View {
                             .padding(.top, geometry.size.height * 0.01)
                     }
                 }
-                Spacer(minLength: geometry.size.height * 0.02)
+                Spacer(minLength: geometry.size.height * 0.025)
                 
                 // Input fields
                 inputField("Cantidad de plantas aplicadas:", value: $cantPlantas, placeholderIndex: 0, hint: "Cant Plantas", width: geometry.size.width)
@@ -58,7 +58,7 @@ struct fungicidas_planta: View {
                 inputField("Volumen final (litros):", value: $volumenFinal, placeholderIndex: 2, hint: "Volumen", width: geometry.size.width)
                 inputField("Cantidad de plantas totales en la parcela por aplicar:", value: $cantPlantasTot, placeholderIndex: 3, hint: "Cant Plantas", width: geometry.size.width)
                 
-                Spacer(minLength: geometry.size.height * 0.03)
+                Spacer(minLength: geometry.size.height * 0.025)
                 HStack {
                     Spacer()
                     // Calculate button
@@ -85,21 +85,21 @@ struct fungicidas_planta: View {
                     .padding(.top, geometry.size.height * 0.02)
                 }
                 
-                Spacer(minLength: geometry.size.height * 0.02)
+                Spacer(minLength: geometry.size.height * 0.018)
                 
                 // Show result
                 result(resultado: resultado, width: geometry.size.width)
                 
-                Spacer(minLength: geometry.size.height * 0.025)
+                Spacer(minLength: geometry.size.height * 0.018)
                 
                 // Navigation Menu
                 navigationMenu(width: geometry.size.width, height: geometry.size.height)
-                
+                Spacer(minLength: geometry.size.height * 0.001)
             }
             .frame(maxWidth: .infinity, maxHeight: .infinity)
-            .background(Color(hex: "#F4F4F4"))
             .edgesIgnoringSafeArea(.all)
         }
+        .background(Color(hex: "#F4F4F4"))
     }
     
     @ViewBuilder
@@ -197,6 +197,7 @@ struct fungicidas_planta: View {
                     .frame(width: width * 0.11)
             }
         }
+        .navigationBarBackButtonHidden(true)
     }
 }
 

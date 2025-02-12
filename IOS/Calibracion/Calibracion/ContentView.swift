@@ -13,6 +13,7 @@ struct menu: View {
     @State private var goToHerbicidas = false
     @State private var goToFungicidas = false
     @State private var goToDosificacion = false
+    @State private var goBack = false
 
     var body: some View {
         NavigationView {
@@ -25,7 +26,7 @@ struct menu: View {
                         .scaledToFill()
                         .frame(width: geometry.size.width, height: geometry.size.height * 1.2)
                         .edgesIgnoringSafeArea(.all)
-
+                    
                     VStack(spacing: geometry.size.height * 0.05) {
                         // Title
                         Text("Calibración")
@@ -43,15 +44,16 @@ struct menu: View {
 
                         Spacer(minLength: geometry.size.height * 0.1)
 
-                        // Navigation links
+                        // Atras Button
                         HStack {
-                            Text("ATRÁS")
-                                .font(.custom("GlacialIndifference-Regular", size: geometry.size.width * 0.06))
-                                .foregroundColor(.black)
-                                .onTapGesture {
-                                    goToStart = false
-                                }
+                            NavigationLink(destination: start(startBind: $goBack), isActive: $goBack) {
+                                Text("ATRÁS")
+                                    .font(.custom("GlacialIndifference-Regular", size: geometry.size.width * 0.06))
+                                    .foregroundColor(.black)
+                            }
+                            
                             Spacer()
+                            // Help Button, redirect to YouTube
                             Link("AYUDA", destination: URL(string: "https://www.youtube.com/watch?v=ufisItmEEpU&ab_channel=Malezas%26Arvenses")!)
                                 .font(.custom("GlacialIndifference-Regular", size: geometry.size.width * 0.06))
                                 .foregroundColor(.black)

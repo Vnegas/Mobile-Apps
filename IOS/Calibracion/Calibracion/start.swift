@@ -9,6 +9,7 @@
 import SwiftUI
 
 struct start: View {
+    @Binding var startBind: Bool
     @State private var goToStart = false
     @State private var showPopup = false
     
@@ -70,8 +71,9 @@ struct start: View {
                     showPopup = true
                 }
             }
-            .navigationViewStyle(StackNavigationViewStyle()) // 👈 Ensures full screen on iPad
+            .navigationViewStyle(StackNavigationViewStyle()) // Ensures full screen on iPad
         }
+        .navigationBarBackButtonHidden(true)
     }
 }
 
@@ -98,7 +100,7 @@ struct PopupView: View {
                 La Universidad de Costa Rica no asumirá ninguna responsabilidad por cualquier pérdida o daño causado por el uso o la información generada en esta aplicación.
                 """)
                 .foregroundColor(.black)
-                .font(.custom("GlacialIndifference-Regular", size: geometry.size.width * 0.035))
+                .font(.custom("GlacialIndifference-Regular", size: geometry.size.width * 0.04))
                 .multilineTextAlignment(.center)
                 Spacer(minLength: geometry.size.width * 0.05)
             }
@@ -119,7 +121,7 @@ struct PopupView: View {
             }
             .padding(.bottom, geometry.size.height * 0.02)
         }
-        .frame(width: geometry.size.width * 0.85, height: geometry.size.height * 0.5)
+        .frame(width: geometry.size.width * 0.85, height: geometry.size.height * 0.6)
         .background(Color.white)
         .cornerRadius(20)
         .shadow(radius: 10)
@@ -127,5 +129,5 @@ struct PopupView: View {
 }
 
 #Preview {
-    start()
+    start(startBind: .constant(true))
 }

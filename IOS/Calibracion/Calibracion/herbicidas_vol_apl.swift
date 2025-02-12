@@ -3,7 +3,7 @@
 //  Calibracion
 //
 //  Created by vnegas on 13/10/24.
-//  Copyright 2023-2024 Sebastian Venegas Brenes https://github.com/Vnegas/Mobile-Apps
+//  Copyright 2023-2024-2025 Sebastian Venegas Brenes https://github.com/Vnegas/Mobile-Apps
 //
 
 import SwiftUI
@@ -48,104 +48,98 @@ struct herbicidas_vol_apl: View {
     }
     
     var body: some View {
-        LazyVStack {
-            Spacer(minLength: 50)
-            ZStack {
-                Image("method_title_bg")
-                    .resizable(resizingMode: .stretch)
-                    .frame(width: 580, height: 230)
-                VStack {
-                    // Screen Title
-                    Spacer(minLength: 30)
-                    Text("Método del volumen\naplicado en un área\nconocida")
-                        .font(.custom("GlacialIndifference-Regular", size: 31.2))
-                        .foregroundColor(.black)
-                        .frame(alignment: .center)
-                        .multilineTextAlignment(.center)
-                    // Method description
-                    Spacer(minLength: 6)
-                    Text("Determina el volumen de aplicación por hectárea. Marque un área conocida y aplique allí agua a la velocidad usual.")
-                        .font(.custom("GlacialIndifference-Regular", size: 20.8))
-                        .foregroundColor(Color(hex: "#373636"))
-                        .frame(width: 377, height: 120, alignment: .center)
-                }
-            }
-            Spacer(minLength: 32)
-            
-            // First input
-            inputField("Área aplicada (m", exponent: "2", value: createBinding(for: $area, placeholderIndex: 0), placeholderIndex: 0, hint: "Área")
-            Spacer(minLength: 15)
-            // Second input
-            inputField("Volumen inicial (litros", value: createBinding(for: $volI, placeholderIndex: 1), placeholderIndex: 1, hint: "Volumen")
-            Spacer(minLength: 15)
-            // Third input
-            inputField("Volumen final (litros", value: createBinding(for: $volF, placeholderIndex: 2), placeholderIndex: 2, hint: "Volumen")
-            
-            // Calculate button
-            Spacer(minLength: 25)
-            HStack {
-                Spacer() // Pushes the text to the right
-                Button(action: {
-                    // Check if any input is missing
-                    showPlaceholder = [
-                        area == nil,
-                        volI == nil,
-                        volF == nil
-                    ]
-                    // Calculate if all inputs are given
-                    if showPlaceholder.contains(true) == false {
-                        let calculation = (((volI ?? 0.0) - (volF ?? 0.0)) * 10000) / (area ?? 1.0)
-                        resultado = calculation
-                    } else {
-                        resultado = nil // Clear previous result if validation fails
+        GeometryReader { geometry in
+            LazyVStack {
+                Spacer(minLength: geometry.size.height * 0.005)
+                ZStack {
+                    Image("method_title_bg")
+                        .resizable()
+                        .frame(width: geometry.size.width, height: geometry.size.height * 0.3)
+                    VStack {
+                        // Screen Title
+                        Text("Método del volumen\naplicado en un área\nconocida")
+                            .font(.custom("GlacialIndifference-Regular", size: geometry.size.width * 0.065))
+                            .foregroundColor(.black)
+                            .frame(alignment: .center)
+                            .multilineTextAlignment(.center)
+                        // Method description
+                        Text("Determina el volumen de aplicación por hectárea. Marque un área conocida y aplique allí agua a la velocidad usual.")
+                            .font(.custom("GlacialIndifference-Regular", size: geometry.size.width * 0.049))
+                            .foregroundColor(Color(hex: "#373636"))
+                            .frame(width: geometry.size.width * 0.9, alignment: .center)
                     }
-                }) {
-                    Text("Calcular")
-                        .font(.custom("GlacialIndifference-Regular", size: 20.6))
-                        .frame(width: 128, height: 57.2, alignment: .center)
-                        .foregroundColor(.black)
-                        .background(Color.accentColor)
-                        .cornerRadius(20)
                 }
-            }
-            .frame(maxWidth: .infinity, alignment: .trailing) // Aligns HStack to the right side of the screen
-            .padding()
-            Spacer(minLength: 20)
-            
-            // Show result
-            result(resultado: resultado)
-            Spacer(minLength: 30)
-            
-            navigationMenu()
-            Spacer(minLength: 15)
-            
-            .navigationBarBackButtonHidden(true)
-        } // LazyVStack
+                Spacer(minLength: geometry.size.height * 0.04)
+                
+                // First input
+                inputField("Área aplicada (m", exponent: "2", value: createBinding(for: $area, placeholderIndex: 0), placeholderIndex: 0, hint: "Área", geometry: geometry)
+                // Second input
+                inputField("Volumen inicial (litros", value: createBinding(for: $volI, placeholderIndex: 1), placeholderIndex: 1, hint: "Volumen", geometry: geometry)
+                // Third input
+                inputField("Volumen final (litros", value: createBinding(for: $volF, placeholderIndex: 2), placeholderIndex: 2, hint: "Volumen", geometry: geometry)
+                
+                // Calculate button
+                Spacer(minLength: geometry.size.height * 0.04)
+                HStack {
+                    Spacer() // Pushes the text to the right
+                    Button(action: {
+                        // Check if any input is missing
+                        showPlaceholder = [
+                            area == nil,
+                            volI == nil,
+                            volF == nil
+                        ]
+                        // Calculate if all inputs are given
+                        if showPlaceholder.contains(true) == false {
+                            let calculation = (((volI ?? 0.0) - (volF ?? 0.0)) * 10000) / (area ?? 1.0)
+                            resultado = calculation
+                        } else {
+                            resultado = nil // Clear previous result if validation fails
+                        }
+                    }) {
+                        Text("Calcular")
+                            .font(.custom("GlacialIndifference-Regular", size: geometry.size.width * 0.049))
+                            .frame(width: geometry.size.width * 0.3, height: geometry.size.height * 0.06, alignment: .center)
+                            .foregroundColor(.black)
+                            .background(Color.accentColor)
+                            .cornerRadius(geometry.size.width * 0.05)
+                    }
+                }
+                .padding(.horizontal, geometry.size.width * 0.05)
+                Spacer(minLength: geometry.size.height * 0.03)
+                
+                // Show result
+                result(resultado: resultado, geometry: geometry)
+                Spacer(minLength: geometry.size.height * 0.04)
+                
+                navigationMenu(width: geometry.size.width, height: geometry.size.height)
+            } // LazyVStack
+            .edgesIgnoringSafeArea(.all) // Fills all screen
+            .frame(maxWidth: .infinity, maxHeight: .infinity)
+        }
         .background(Color(hex: "#F4F4F4"))
-        .edgesIgnoringSafeArea(.all) // Fills all screen
-        .frame(maxWidth: .infinity, maxHeight: .infinity)
     } // Body
     
     @ViewBuilder
-    func inputField(_ label: String, exponent: String = "", value: Binding<String>, placeholderIndex: Int, hint: String) -> some View {
+    func inputField(_ label: String, exponent: String = "", value: Binding<String>, placeholderIndex: Int, hint: String, geometry: GeometryProxy) -> some View {
         HStack {
             Text(label)
-                .font(.custom("GlacialIndifference-Regular", size: 20.6))
+                .font(.custom("GlacialIndifference-Regular", size: geometry.size.width * 0.04))
                 .foregroundColor(Color(hex: "#373636"))
             + Text(exponent)
-                .baselineOffset(6.0)
-                .font(.custom("GlacialIndifference-Regular", size: 12))
+                .baselineOffset(geometry.size.width * 0.008)
+                .font(.custom("GlacialIndifference-Regular", size: geometry.size.width * 0.025))
                 .foregroundColor(Color(hex: "#373636"))
             + Text("):")
-                .font(.custom("GlacialIndifference-Regular", size: 20.6))
+                .font(.custom("GlacialIndifference-Regular", size: geometry.size.width * 0.04))
                 .foregroundColor(Color(hex: "#373636"))
             Spacer()
             TextField(showPlaceholder[placeholderIndex] ? "Agregar Dato" : "\(hint)", text: value)
                 .keyboardType(.numberPad)
-                .font(.custom("GlacialIndifference-Regular", size: 19))
+                .font(.custom("GlacialIndifference-Regular", size: geometry.size.width * 0.04))
                 .foregroundColor(showPlaceholder[placeholderIndex] ? Color(hex: "#68FF0000") : Color(hex: "#373636"))
                 .multilineTextAlignment(.center)
-                .frame(width: 150, height: 47, alignment: .center)
+                .frame(width: geometry.size.width * 0.33, height: geometry.size.height * 0.06, alignment: .trailing)
                 .background {
                     if #available(iOS 17.0, *) {
                         RoundedRectangle(cornerRadius: 65)
@@ -186,59 +180,63 @@ struct herbicidas_vol_apl: View {
     } // decimal format
     
     @ViewBuilder
-    func result(resultado: Double?) -> some View {
+    func result(resultado: Double?, geometry: GeometryProxy) -> some View {
         HStack {
             ZStack {
                 Image("result_shape")
-                    .resizable(resizingMode: .stretch)
-                    .frame(width: 208, height: 65)
+                    .resizable()
+                    .frame(width: geometry.size.width * 0.33, height: geometry.size.height * 0.1)
                 Text(resultado != nil ? "\(formatNumber(resultado!))" : "Resultado")
-                    .font(.custom("GlacialIndifference-Regular", size: 28.6))
-                    .frame(width: 177, height: 42, alignment: .center)
+                    .font(.custom("GlacialIndifference-Regular", size: geometry.size.width * 0.059))
                     .foregroundColor(.black)
             }
             Text("litros/ha")
-                .font(.custom("GlacialIndifference-Regular", size: 28))
-                .frame(width: 110, height: 32.5, alignment: .center)
+                .font(.custom("GlacialIndifference-Regular", size: geometry.size.width * 0.059))
                 .foregroundColor(.black)
                 .fontWeight(.bold)
         }
     }
     
     @ViewBuilder
-    func navigationMenu() -> some View {
+    func navigationMenu(width: CGFloat, height: CGFloat) -> some View {
         // Navigation menu
         HStack {
             // Herbicidas navigation
             NavigationLink(destination: herbicidas(goToMenuFromHerb: $goToHerbicidasMenu), isActive: $goToHerbicidas) {
                 Image("icon_herb")
-                    .resizable(resizingMode: .stretch)
-                    .frame(width: 58.6, height: 58.6)
+                    .resizable()
+                    .scaledToFit()
+                    .frame(width: width * 0.11)
             }
             // Icon spacer / divider
             Image("icon_divider")
-                .resizable(resizingMode: .stretch)
-                .frame(width: 40, height: 49.4)
+                .resizable()
+                .scaledToFit()
+                .frame(width: width * 0.1, height: height * 0.05)
             // Fungicidas icon navigation
             NavigationLink(destination: fungicidas(goToMenuFromHerb: $goToHerbicidasMenu), isActive: $goToFungicidas) {
                 Image("icon_fung2")
-                    .resizable(resizingMode: .stretch)
-                    .frame(width: 58.6, height: 58.6)
+                    .resizable()
+                    .scaledToFit()
+                    .frame(width: width * 0.11)
             }
             // Icon spacer / divider
             Image("icon_divider")
-                .resizable(resizingMode: .stretch)
-                .frame(width: 40, height: 49.4)
+                .resizable()
+                .scaledToFit()
+                .frame(width: width * 0.1, height: height * 0.05)
             // Dosificacion icon navigation
             NavigationLink(destination: dosificacion(goToHerbicidasMenu: $goToHerbicidasMenu), isActive: $goToDosificacion) {
                 Image("icon_dosi")
-                    .resizable(resizingMode: .stretch)
-                    .frame(width: 58.6, height: 58.6)
+                    .resizable()
+                    .scaledToFit()
+                    .frame(width: width * 0.11)
             }
         } // HStack
+        .navigationBarBackButtonHidden(true)
     } // NavigationMenu
 } // Herbicidas View
 
 #Preview {
-    //herbicidas_vol_apl()
+    herbicidas_vol_apl(goToHerbicidasMenu: .constant(false))
 }

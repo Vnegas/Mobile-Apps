@@ -36,7 +36,7 @@ struct fungicidas_area: View {
                     Image("method_title_bg")
                         .resizable()
                         .scaledToFit()
-                        .frame(width: geometry.size.width * 2, height: geometry.size.height * 0.3)
+                        .frame(width: geometry.size.width, height: geometry.size.height * 0.3)
                     
                     VStack {
                         Text("Área")
@@ -59,7 +59,7 @@ struct fungicidas_area: View {
                 inputField("Volumen final (litros", value: $volumenFinal, placeholderIndex: 2, hint: "Volumen", width: geometry.size.width)
                 inputField("Área del cultivo por aplicar (m", exponent: "2", value: $areaCultivo, placeholderIndex: 3, hint: "Área", width: geometry.size.width)
                 
-                Spacer(minLength: geometry.size.height * 0.03)
+                Spacer(minLength: geometry.size.height * 0.025)
                 HStack {
                     Spacer()
                     // Calculate button
@@ -86,21 +86,21 @@ struct fungicidas_area: View {
                     .padding(.top, geometry.size.height * 0.02)
                 }
                 
-                Spacer(minLength: geometry.size.height * 0.02)
+                Spacer(minLength: geometry.size.height * 0.018)
                 
                 // Show result
                 result(resultado: resultado, width: geometry.size.width)
                 
-                Spacer(minLength: geometry.size.height * 0.025)
+                Spacer(minLength: geometry.size.height * 0.018)
                 
                 // Navigation Menu
                 navigationMenu(width: geometry.size.width, heigth: geometry.size.height)
-                
+                Spacer(minLength: geometry.size.height * 0.001)
             }
             .frame(maxWidth: .infinity, maxHeight: .infinity)
-            .background(Color(hex: "#F4F4F4"))
             .edgesIgnoringSafeArea(.all)
         }
+        .background(Color(hex: "#F4F4F4"))
     }
     
     @ViewBuilder
@@ -208,6 +208,7 @@ struct fungicidas_area: View {
                     .frame(width: width * 0.11)
             }
         }
+        .navigationBarBackButtonHidden(true)
     }
 }
 

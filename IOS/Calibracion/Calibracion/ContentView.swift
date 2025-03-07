@@ -14,6 +14,7 @@ struct menu: View {
     @State private var goToFungicidas = false
     @State private var goToDosificacion = false
     @State private var goBack = false
+    @State private var goToAyuda = false
 
     var body: some View {
         NavigationView {
@@ -53,10 +54,12 @@ struct menu: View {
                             }
                             
                             Spacer()
-                            // Help Button, redirect to YouTube
-                            Link("AYUDA", destination: URL(string: "https://www.youtube.com/watch?v=ufisItmEEpU&ab_channel=Malezas%26Arvenses")!)
-                                .font(.custom("GlacialIndifference-Regular", size: geometry.size.width * 0.06))
-                                .foregroundColor(.black)
+                            // Help Button
+                            NavigationLink(destination: ayuda(goToMenu: $goToAyuda), isActive: $goToAyuda) {
+                                Text("AYUDA")
+                                    .font(.custom("GlacialIndifference-Regular", size: geometry.size.width * 0.06))
+                                    .foregroundColor(.black)
+                            }
                         }
                         .padding(.horizontal, geometry.size.width * 0.1)
                         .frame(maxWidth: .infinity)

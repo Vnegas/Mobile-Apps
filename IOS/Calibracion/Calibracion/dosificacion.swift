@@ -212,10 +212,10 @@ struct dosificacion: View {
             ZStack {
                 Image("result_shape")
                     .resizable()
-                    .frame(width: geometry.size.width * 0.3, height: geometry.size.height * 0.07)
+                    .frame(width: geometry.size.width * 0.34, height: geometry.size.height * 0.07)
                 Text(resultado != nil ? "\(formatNumber(resultado!))" : "Resultado")
-                    .font(.custom("GlacialIndifference-Regular", size: geometry.size.width * 0.05))
-                    .frame(width: 123, height: 36.4, alignment: .center)
+                    .font(.custom("GlacialIndifference-Regular", size: geometry.size.width * 0.048))
+                    .frame(width: geometry.size.width * 0.26, height: 36.4, alignment: .center)
                     .foregroundColor(.black)
             }
         }

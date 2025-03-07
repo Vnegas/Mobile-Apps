@@ -54,7 +54,7 @@ struct herbicidas_vol_fijo: View {
     var body: some View {
         GeometryReader { geometry in
             LazyVStack {
-                Spacer(minLength: geometry.size.height * 0.099)
+                Spacer(minLength: geometry.size.height * 0.059)
                 ZStack {
                     Image("method_title_bg")
                         .resizable()

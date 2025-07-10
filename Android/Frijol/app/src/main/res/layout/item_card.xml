@@ -1,0 +1,48 @@
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    xmlns:card_view="http://schemas.android.com/apk/res-auto"
+    android:clickable="true"
+    android:clipToPadding="false"
+    card_view:cardElevation="8dp"
+    card_view:cardCornerRadius="20dp"
+    card_view:cardBackgroundColor="@color/base"
+    android:foreground="?attr/selectableItemBackground">
+
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/_144sdp"
+        android:orientation="vertical"
+        android:gravity="center" >
+
+        <com.google.android.material.card.MaterialCardView
+            android:layout_width="@dimen/_102sdp"
+            android:layout_height="@dimen/_102sdp"
+            android:layout_marginTop="@dimen/_6sdp"
+            android:layout_marginHorizontal="@dimen/_20sdp"
+            card_view:cardCornerRadius="16dp"
+            card_view:strokeColor="@android:color/transparent"
+            card_view:strokeWidth="0dp"
+            card_view:cardPreventCornerOverlap="false">
+
+            <ImageView
+                android:id="@+id/imagen_arvense"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:scaleType="centerCrop"
+                android:src="@drawable/app_logo" />
+        </com.google.android.material.card.MaterialCardView>
+
+        <TextView
+            android:id="@+id/item_name"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/_30sdp"
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:textStyle="bold"
+            android:textAlignment="center"
+            android:layout_marginTop="@dimen/_4sdp"
+            android:background="@color/white"
+            android:textColor="@color/primary" />
+    </LinearLayout>
+</androidx.cardview.widget.CardView>

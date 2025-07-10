@@ -1,0 +1,40 @@
+<resources>
+    <!-- Título -->
+    <string name="app_name">Frijolarvenses</string>
+    <string name="title">FrijolArvenses</string>
+
+    <!-- Advertencia -->
+    <string name="advertencia_contenido">La información sobre manejo acá se incluye de buena fe. Los autores o la Universidad de Costa Rica no asumen ni se responsabilizan por el uso y sus consecuencias a partir de la información suministrada.</string>
+
+    <!-- Descripción imagenes -->
+    <string name="app_icon">App Icon</string>
+    <string name="menu">Popup Menu</string>
+
+    <!-- Títulos Tabs -->
+    <string name="informacion_adicional">Información\nadicional</string>
+    <string name="taxonomia">Taxonomía</string>
+    <string name="galeria">Galería</string>
+
+    <!-- Sobre Nosotros -->
+    <string name="autores">Autores:</string>
+    <string name="autores_content">Mary Pamela Portuguez García</string>
+    <string name="programadores">Programadores:</string>
+    <string name="programadores_content">Sebastián Venegas Brenes</string>
+    <string name="disennadores">Diseñadores Gráficos:</string>
+    <string name="disennadores_content">Evelin Naranjo Madrigal\nJasmín Ortega Gutiérrez\nKevin Amador Navarro\nJosé Guerrero Berroteran</string>
+    <string name="agradecimiento">Agradecimiento:</string>
+    <string name="agradecimiento_content">Silvia Lobo Cabezas\nAlonso Quesada Hernández\nHerbario Nacional \nA todos los productores de frijol que nos permitieron muestrear sus fincas.</string>
+    <string name="contacto">Contacto</string>
+    <string name="correo">Correo: arvenses.eeafbm@ucr.ac.cr</string>
+    <string name="telefono">Teléfono: +506 2511-7950</string>
+    <string name="pagina_web">Página web: https://arvenses-eeafbm.ucr.ac.cr/index.php/es/</string>
+    <string name="politicas_de_privacidad">Políticas de privacidad</string>
+    <string name="proyecto">Proyecto de Acción Social \nED-1816, Universidad de Costa Rica</string>
+
+    <!-- Botones -->
+    <string name="entendido">Entendido</string>
+    <string name="entrar">Entrar</string>
+    <string name="volver">Volver</string>
+    <string name="bienvenido">Bienvenido a arvenses de Frijol</string>
+    <string name="referencias">Descargar Referencias</string>
+</resources>

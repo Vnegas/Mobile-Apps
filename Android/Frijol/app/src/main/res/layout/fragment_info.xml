@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/base"
+    android:padding="16dp" >
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/_70sdp"
+        android:layout_marginTop="@dimen/_16sdp" >
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/open_pdf"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:backgroundTint="@color/white"
+            app:strokeColor="@color/primary"
+            app:strokeWidth="4dp"
+            android:gravity="start|center_vertical"
+            android:text="@string/referencias"
+            android:textColor="@color/primary"
+            android:textSize="@dimen/_16sdp" />
+
+        <ImageView
+            android:id="@+id/referencias_icon"
+            android:layout_width="@dimen/_38sdp"
+            android:layout_height="@dimen/_38sdp"
+            android:layout_gravity="end|center_vertical"
+            android:layout_marginEnd="@dimen/_20sdp"
+            android:contentDescription="@string/referencias"
+            app:srcCompat="@drawable/download_icon" />
+    </FrameLayout>
+</LinearLayout>

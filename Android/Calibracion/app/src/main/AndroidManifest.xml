@@ -11,7 +11,7 @@
         android:roundIcon="@mipmap/logo_calibracion"
         android:supportsRtl="true"
         android:theme="@style/Theme.Calibracion"
-        tools:targetApi="31">
+        tools:targetApi="35">
         <activity
             android:name=".ayuda"
             android:exported="false" />

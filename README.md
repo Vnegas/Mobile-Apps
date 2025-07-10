@@ -11,7 +11,7 @@ Se desarrolló empleando el lenguaje de programación JAVA en la tecnología de 
 Desarrollador:
 - Sebastián Venegas Brenes
 
-Diseñadores: 
+Diseñador: 
 - Sebastián Venegas Brenes
 
 ---
@@ -30,7 +30,7 @@ Para el sistema operativo IOS, se desarrolló con el uso del lenguaje de program
 Desarrollador:
 - Sebastián Venegas Brenes
 
-Diseñadores: 
+Diseñador: 
 - Sebastián Venegas Brenes
 
 ---
@@ -49,5 +49,5 @@ For the iOS operating system, it was developed using the SwiftUI programming lan
 Developer:
 - Sebastián Venegas Brenes
 
-Designers:
+Designer:
 - Sebastián Venegas Brenes

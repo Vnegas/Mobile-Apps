@@ -2,9 +2,9 @@
 
 App móvil (Android) creada para la UCR - Estación Experimental Agrícola Fabio Baudrit Moreno
 
-La aplicación expone información e imágenes de frijol, arvenses. Extrae la información de una base de datos; además de tener un filtro, para los arvenses, de acuerdo a la taxonomía del frijol.
+La aplicación expone información e imágenes de frijol, arvenses. Extrae la información de una base de datos; además de tener un filtro, para los arvenses, de acuerdo a la taxonomía de arvenses del frijol.
 
-Se desarrolló empleando el lenguaje de programación JAVA en la tecnología de Android Studio, se utilizó un script de python para generar la base de datos (desde un archivo .csv)
+Se desarrolló empleando el lenguaje de programación JAVA en la tecnología de Android Studio, se utilizó un script de Python para generar la base de datos (desde un archivo .csv).
 
 ## Créditos
 
@@ -18,12 +18,12 @@ Diseñador:
 
 # Calibración
 
-App móvil (Android and iOS) creada para la UCR - Estación Experimental Agrícola Fabio Baudrit Moreno
+App móvil (Android e iOS) creada para la UCR - Estación Experimental Agrícola Fabio Baudrit Moreno
 
-La aplicación cálcula la calibración de herbicidas, insecticidas, fungicidas y la dosificación.
+La aplicación calcula la calibración de herbicidas, insecticidas, fungicidas y la dosificación de los mismos.
 
-Se desarrolló empleando el lenguaje de programación JAVA en la tecnología de Android Studio, para el sistema operativo Android.
-Para el sistema operativo IOS, se desarrolló con el uso del lenguaje de programación SwiftUI y la tecnología XCODE.
+Se desarrolló empleando el lenguaje de programación JAVA en el entorno de desarrollo Android Studio, para el sistema operativo Android.
+Para el sistema operativo iOS, se desarrolló con el uso del lenguaje de programación SwiftUI y la tecnología XCODE.
 
 ## Créditos
 

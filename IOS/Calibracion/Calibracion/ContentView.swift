@@ -10,11 +10,7 @@ import SwiftUI
 
 struct menu: View {
     @Binding var goToStart: Bool
-    @State private var goToHerbicidas = false
-    @State private var goToFungicidas = false
-    @State private var goToDosificacion = false
-    @State private var goBack = false
-    @State private var goToAyuda = false
+    @Environment(\.presentationMode) var presentationMode
 
     var body: some View {
         NavigationView {
@@ -37,25 +33,34 @@ struct menu: View {
                             .padding(.top, geometry.size.height * 0.12)
 
                         // Buttons
-                        menuButton(title: "HERBICIDAS", icon: "icon_herb", isActive: $goToHerbicidas, destination: herbicidas(goToMenuFromHerb: $goToHerbicidas), geometry: geometry)
+                        NavigationLink(destination: herbicidas(goToMenuFromHerb: .constant(false))) {
+                            menuButton(title: "HERBICIDAS", icon: "icon_herb", geometry: geometry)
+                        }
 
-                        menuButton(title: "FUNGICIDAS E INSECTICIDAS", icon: "icon_fung2", isActive: $goToFungicidas, destination: fungicidas(goToMenuFromHerb: $goToHerbicidas), geometry: geometry)
+                        NavigationLink(destination: fungicidas(goToMenuFromHerb: .constant(false))) {
+                            menuButton(title: "FUNGICIDAS E INSECTICIDAS", icon: "icon_fung2", geometry: geometry)
+                        }
 
-                        menuButton(title: "DOSIFICACIÓN", icon: "icon_dosi", isActive: $goToDosificacion, destination: dosificacion(goToHerbicidasMenu: $goToHerbicidas), geometry: geometry)
+                        NavigationLink(destination: dosificacion(goToHerbicidasMenu: .constant(false))) {
+                            menuButton(title: "DOSIFICACIÓN", icon: "icon_dosi", geometry: geometry)
+                        }
 
                         Spacer(minLength: geometry.size.height * 0.1)
 
-                        // Atras Button
+                        // Navigation buttons
                         HStack {
-                            NavigationLink(destination: start(startBind: $goBack), isActive: $goBack) {
+                            Button(action: {
+                                goToStart = false
+                                presentationMode.wrappedValue.dismiss()
+                            }) {
                                 Text("ATRÁS")
                                     .font(.custom("GlacialIndifference-Regular", size: geometry.size.width * 0.06))
                                     .foregroundColor(.black)
                             }
                             
                             Spacer()
-                            // Help Button
-                            NavigationLink(destination: ayuda(goToMenu: $goToAyuda), isActive: $goToAyuda) {
+                            
+                            NavigationLink(destination: ayuda(goToMenu: .constant(false))) {
                                 Text("AYUDA")
                                     .font(.custom("GlacialIndifference-Regular", size: geometry.size.width * 0.06))
                                     .foregroundColor(.black)
@@ -68,14 +73,13 @@ struct menu: View {
                 }
             }
         }
-        .navigationViewStyle(.stack) // Forces full-screen mode on iPad
+        .navigationViewStyle(.stack)
         .navigationBarBackButtonHidden(true)
     }
-}
-
-// Reusable button for menu items
-func menuButton<Destination: View>(title: String, icon: String, isActive: Binding<Bool>, destination: Destination, geometry: GeometryProxy) -> some View {
-    NavigationLink(destination: destination, isActive: isActive) {
+    
+    // Reusable button for menu items
+    @ViewBuilder
+    func menuButton(title: String, icon: String, geometry: GeometryProxy) -> some View {
         HStack {
             Image(icon)
                 .resizable()

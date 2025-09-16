@@ -12,9 +12,6 @@ struct fungicidas_planta: View {
     // Navigation variables
     @Binding var goToFungicidasMenu: Bool
     @Binding var goToHerbicidasMenu: Bool
-    @State private var goToHerbicidas = false
-    @State private var goToFungicidas = false
-    @State private var goToDosificacion = false
     
     // Input variables
     @State private var cantPlantas: Double? = nil
@@ -30,6 +27,7 @@ struct fungicidas_planta: View {
         GeometryReader { geometry in
             LazyVStack {
                 Spacer(minLength: geometry.size.height * 0.005)
+                
                 // Background & Title
                 ZStack {
                     Image("method_title_bg")
@@ -61,7 +59,6 @@ struct fungicidas_planta: View {
                 Spacer(minLength: geometry.size.height * 0.025)
                 HStack {
                     Spacer()
-                    // Calculate button
                     Button(action: {
                         showPlaceholder = [
                             cantPlantas == nil,
@@ -74,6 +71,7 @@ struct fungicidas_planta: View {
                         } else {
                             resultado = nil
                         }
+                        ocultarTeclado()
                     }) {
                         Text("Calcular")
                             .font(.custom("GlacialIndifference-Regular", size: geometry.size.width * 0.049))
@@ -87,12 +85,10 @@ struct fungicidas_planta: View {
                 
                 Spacer(minLength: geometry.size.height * 0.018)
                 
-                // Show result
                 result(resultado: resultado, width: geometry.size.width)
                 
                 Spacer(minLength: geometry.size.height * 0.018)
                 
-                // Navigation Menu
                 navigationMenu(width: geometry.size.width, height: geometry.size.height)
                 Spacer(minLength: geometry.size.height * 0.001)
             }
@@ -100,6 +96,9 @@ struct fungicidas_planta: View {
             .edgesIgnoringSafeArea(.all)
         }
         .background(Color(hex: "#F4F4F4"))
+        .onTapGesture {
+            ocultarTeclado()
+        }
     }
     
     @ViewBuilder
@@ -166,7 +165,7 @@ struct fungicidas_planta: View {
     @ViewBuilder
     func navigationMenu(width: CGFloat, height: CGFloat) -> some View {
         HStack {
-            NavigationLink(destination: herbicidas(goToMenuFromHerb: $goToHerbicidasMenu), isActive: $goToHerbicidas) {
+            NavigationLink(destination: herbicidas(goToMenuFromHerb: $goToHerbicidasMenu)) {
                 Image("icon_herb")
                     .resizable()
                     .scaledToFit()
@@ -178,7 +177,7 @@ struct fungicidas_planta: View {
                 .scaledToFit()
                 .frame(width: width * 0.1, height: height * 0.05)
             
-            NavigationLink(destination: fungicidas(goToMenuFromHerb: $goToFungicidasMenu), isActive: $goToFungicidas) {
+            NavigationLink(destination: fungicidas(goToMenuFromHerb: $goToFungicidasMenu)) {
                 Image("icon_fung2")
                     .resizable()
                     .scaledToFit()
@@ -190,7 +189,7 @@ struct fungicidas_planta: View {
                 .scaledToFit()
                 .frame(width: width * 0.1, height: height * 0.05)
             
-            NavigationLink(destination: dosificacion(goToHerbicidasMenu: $goToHerbicidasMenu), isActive: $goToDosificacion) {
+            NavigationLink(destination: dosificacion(goToHerbicidasMenu: $goToHerbicidasMenu)) {
                 Image("icon_dosi")
                     .resizable()
                     .scaledToFit()

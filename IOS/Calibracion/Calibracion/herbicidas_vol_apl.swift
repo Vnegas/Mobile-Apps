@@ -9,13 +9,8 @@
 import SwiftUI
 
 struct herbicidas_vol_apl: View {
-    let screenWidth = UIScreen.main.bounds.size.width;
-    
     // Navigation variables
     @Binding var goToHerbicidasMenu: Bool
-    @State private var goToHerbicidas = false
-    @State private var goToFungicidas = false
-    @State private var goToDosificacion = false
     
     // Input variables
     @State private var area: Double? = nil
@@ -23,7 +18,7 @@ struct herbicidas_vol_apl: View {
     @State private var volF: Double? = nil
     @State private var resultado: Double? = nil
     
-    // State variables to control placeholder display - See if input is already introduced
+    // State variables to control placeholder display
     @State private var showPlaceholder = [false, false, false]
     
     // Function to bind input variables
@@ -39,7 +34,7 @@ struct herbicidas_vol_apl: View {
             set: { newValue in
                 if let intValue = Double(newValue) {
                     input.wrappedValue = intValue
-                    showPlaceholder[placeholderIndex] = false // Reset placeholder on valid input
+                    showPlaceholder[placeholderIndex] = false
                 } else if newValue.isEmpty {
                     input.wrappedValue = nil
                 }
@@ -56,13 +51,11 @@ struct herbicidas_vol_apl: View {
                         .resizable()
                         .frame(width: geometry.size.width, height: geometry.size.height * 0.3)
                     VStack {
-                        // Screen Title
                         Text("Método del volumen\naplicado en un área\nconocida")
                             .font(.custom("GlacialIndifference-Regular", size: geometry.size.width * 0.065))
                             .foregroundColor(.black)
                             .frame(alignment: .center)
                             .multilineTextAlignment(.center)
-                        // Method description
                         Text("Determina el volumen de aplicación por hectárea. Marque un área conocida y aplique allí agua a la velocidad usual.")
                             .font(.custom("GlacialIndifference-Regular", size: geometry.size.width * 0.049))
                             .foregroundColor(Color(hex: "#373636"))
@@ -71,35 +64,32 @@ struct herbicidas_vol_apl: View {
                 }
                 Spacer(minLength: geometry.size.height * 0.04)
                 
-                // First input
+                // Input fields
                 inputField("Área aplicada (m", exponent: "2", value: createBinding(for: $area, placeholderIndex: 0), placeholderIndex: 0, hint: "Área", geometry: geometry)
-                // Second input
                 inputField("Volumen inicial (litros", value: createBinding(for: $volI, placeholderIndex: 1), placeholderIndex: 1, hint: "Volumen", geometry: geometry)
-                // Third input
                 inputField("Volumen final (litros", value: createBinding(for: $volF, placeholderIndex: 2), placeholderIndex: 2, hint: "Volumen", geometry: geometry)
                 
-                // Calculate button
                 Spacer(minLength: geometry.size.height * 0.04)
                 HStack {
-                    Spacer() // Pushes the text to the right
+                    Spacer()
                     Button(action: {
-                        // Check if any input is missing
                         showPlaceholder = [
                             area == nil,
                             volI == nil,
                             volF == nil
                         ]
-                        // Calculate if all inputs are given
-                        if showPlaceholder.contains(true) == false {
+                        
+                        if !showPlaceholder.contains(true) {
                             let calculation = (((volI ?? 0.0) - (volF ?? 0.0)) * 10000) / (area ?? 1.0)
                             resultado = calculation
                         } else {
-                            resultado = nil // Clear previous result if validation fails
+                            resultado = nil
                         }
+                        ocultarTeclado()
                     }) {
                         Text("Calcular")
                             .font(.custom("GlacialIndifference-Regular", size: geometry.size.width * 0.049))
-                            .frame(width: geometry.size.width * 0.3, height: geometry.size.height * 0.06, alignment: .center)
+                            .frame(width: geometry.size.width * 0.3, height: geometry.size.height * 0.06)
                             .foregroundColor(.black)
                             .background(Color.accentColor)
                             .cornerRadius(geometry.size.width * 0.05)
@@ -108,17 +98,19 @@ struct herbicidas_vol_apl: View {
                 .padding(.horizontal, geometry.size.width * 0.05)
                 Spacer(minLength: geometry.size.height * 0.03)
                 
-                // Show result
                 result(resultado: resultado, geometry: geometry)
                 Spacer(minLength: geometry.size.height * 0.04)
                 
                 navigationMenu(width: geometry.size.width, height: geometry.size.height)
-            } // LazyVStack
-            .edgesIgnoringSafeArea(.all) // Fills all screen
-            .frame(maxWidth: .infinity, maxHeight: .infinity)
+            }
         }
         .background(Color(hex: "#F4F4F4"))
-    } // Body
+        .edgesIgnoringSafeArea(.all)
+        .frame(maxWidth: .infinity, maxHeight: .infinity)
+        .onTapGesture {
+            ocultarTeclado()
+        }
+    }
     
     @ViewBuilder
     func inputField(_ label: String, exponent: String = "", value: Binding<String>, placeholderIndex: Int, hint: String, geometry: GeometryProxy) -> some View {
@@ -139,7 +131,7 @@ struct herbicidas_vol_apl: View {
                 .font(.custom("GlacialIndifference-Regular", size: geometry.size.width * 0.04))
                 .foregroundColor(showPlaceholder[placeholderIndex] ? Color(hex: "#68FF0000") : Color(hex: "#373636"))
                 .multilineTextAlignment(.center)
-                .frame(width: geometry.size.width * 0.33, height: geometry.size.height * 0.06, alignment: .trailing)
+                .frame(width: geometry.size.width * 0.33, height: geometry.size.height * 0.06)
                 .background {
                     if #available(iOS 17.0, *) {
                         RoundedRectangle(cornerRadius: 65)
@@ -151,33 +143,28 @@ struct herbicidas_vol_apl: View {
                             .border(.accent, width: 2)
                     }
                 }
-        } // HStack
+        }
         .padding(.top, 10)
         .padding(.leading, 16)
         .padding(.trailing, 16)
-    } // InputField
+    }
     
-    // Decimal format
     func formatNumber(_ number: Double) -> String {
         let formatter = NumberFormatter()
-        
-        // Default style
         formatter.numberStyle = .decimal
         formatter.maximumFractionDigits = 3
         
-        // Scientific notation for very small numbers
         if abs(number) < 0.001 && number != 0 {
             formatter.numberStyle = .scientific
             formatter.maximumFractionDigits = 3
         }
         
-        // Remove decimals for integers
         if number == floor(number) {
             formatter.maximumFractionDigits = 0
         }
         
         return formatter.string(from: NSNumber(value: number)) ?? ""
-    } // decimal format
+    }
     
     @ViewBuilder
     func result(resultado: Double?, geometry: GeometryProxy) -> some View {
@@ -199,43 +186,41 @@ struct herbicidas_vol_apl: View {
     
     @ViewBuilder
     func navigationMenu(width: CGFloat, height: CGFloat) -> some View {
-        // Navigation menu
         HStack {
-            // Herbicidas navigation
-            NavigationLink(destination: herbicidas(goToMenuFromHerb: $goToHerbicidasMenu), isActive: $goToHerbicidas) {
+            NavigationLink(destination: herbicidas(goToMenuFromHerb: $goToHerbicidasMenu)) {
                 Image("icon_herb")
                     .resizable()
                     .scaledToFit()
                     .frame(width: width * 0.11)
             }
-            // Icon spacer / divider
+            
             Image("icon_divider")
                 .resizable()
                 .scaledToFit()
                 .frame(width: width * 0.1, height: height * 0.05)
-            // Fungicidas icon navigation
-            NavigationLink(destination: fungicidas(goToMenuFromHerb: $goToHerbicidasMenu), isActive: $goToFungicidas) {
+            
+            NavigationLink(destination: fungicidas(goToMenuFromHerb: $goToHerbicidasMenu)) {
                 Image("icon_fung2")
                     .resizable()
                     .scaledToFit()
                     .frame(width: width * 0.11)
             }
-            // Icon spacer / divider
+            
             Image("icon_divider")
                 .resizable()
                 .scaledToFit()
                 .frame(width: width * 0.1, height: height * 0.05)
-            // Dosificacion icon navigation
-            NavigationLink(destination: dosificacion(goToHerbicidasMenu: $goToHerbicidasMenu), isActive: $goToDosificacion) {
+            
+            NavigationLink(destination: dosificacion(goToHerbicidasMenu: $goToHerbicidasMenu)) {
                 Image("icon_dosi")
                     .resizable()
                     .scaledToFit()
                     .frame(width: width * 0.11)
             }
-        } // HStack
+        }
         .navigationBarBackButtonHidden(true)
-    } // NavigationMenu
-} // Herbicidas View
+    }
+}
 
 #Preview {
     herbicidas_vol_apl(goToHerbicidasMenu: .constant(false))

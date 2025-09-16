@@ -12,9 +12,6 @@ struct fungicidas_area: View {
     // Navigation variables
     @Binding var goToFungicidasMenu: Bool
     @Binding var goToHerbicidasMenu: Bool
-    @State private var goToHerbicidas = false
-    @State private var goToFungicidas = false
-    @State private var goToDosificacion = false
     
     // Input variables
     @State private var areaAplicada: Double? = nil
@@ -48,9 +45,10 @@ struct fungicidas_area: View {
                             .foregroundColor(Color(hex: "#373636"))
                             .frame(width: geometry.size.width * 0.9)
                             .multilineTextAlignment(.center)
-                            .padding(.top, geometry.size.height * 0.01)
+                            .padding(.top, geometry.size.height * 0.02)
                     }
                 }
+                
                 Spacer(minLength: geometry.size.height * 0.02)
                 
                 // Input fields
@@ -62,7 +60,6 @@ struct fungicidas_area: View {
                 Spacer(minLength: geometry.size.height * 0.025)
                 HStack {
                     Spacer()
-                    // Calculate button
                     Button(action: {
                         showPlaceholder = [
                             areaAplicada == nil,
@@ -75,6 +72,7 @@ struct fungicidas_area: View {
                         } else {
                             resultado = nil
                         }
+                        ocultarTeclado()
                     }) {
                         Text("Calcular")
                             .font(.custom("GlacialIndifference-Regular", size: geometry.size.width * 0.05))
@@ -83,24 +81,25 @@ struct fungicidas_area: View {
                             .background(Color.accentColor)
                             .cornerRadius(geometry.size.width * 0.05)
                     }
-                    .padding(.top, geometry.size.height * 0.02)
+                    .padding(.top, geometry.size.height * 0.01)
                 }
                 
                 Spacer(minLength: geometry.size.height * 0.018)
                 
-                // Show result
                 result(resultado: resultado, width: geometry.size.width)
                 
                 Spacer(minLength: geometry.size.height * 0.018)
                 
-                // Navigation Menu
-                navigationMenu(width: geometry.size.width, heigth: geometry.size.height)
+                navigationMenu(width: geometry.size.width, height: geometry.size.height)
                 Spacer(minLength: geometry.size.height * 0.001)
             }
             .frame(maxWidth: .infinity, maxHeight: .infinity)
             .edgesIgnoringSafeArea(.all)
         }
         .background(Color(hex: "#F4F4F4"))
+        .onTapGesture {
+            ocultarTeclado()
+        }
     }
     
     @ViewBuilder
@@ -145,7 +144,6 @@ struct fungicidas_area: View {
                         .border(.accent, width: 2)
                 }
             }
-
         }
         .padding(.horizontal, 16)
         .padding(.top, 10)
@@ -173,35 +171,33 @@ struct fungicidas_area: View {
     }
     
     @ViewBuilder
-    func navigationMenu(width: CGFloat, heigth: CGFloat) -> some View {
+    func navigationMenu(width: CGFloat, height: CGFloat) -> some View {
         HStack {
-            NavigationLink(destination: herbicidas(goToMenuFromHerb: $goToHerbicidasMenu), isActive: $goToHerbicidas) {
+            NavigationLink(destination: herbicidas(goToMenuFromHerb: $goToHerbicidasMenu)) {
                 Image("icon_herb")
                     .resizable()
                     .scaledToFit()
                     .frame(width: width * 0.11)
             }
             
-            // Icon spacer / divider
             Image("icon_divider")
                 .resizable()
                 .scaledToFit()
-                .frame(width: width * 0.1, height: heigth * 0.05)
+                .frame(width: width * 0.1, height: height * 0.05)
             
-            NavigationLink(destination: fungicidas(goToMenuFromHerb: $goToHerbicidasMenu), isActive: $goToFungicidas) {
+            NavigationLink(destination: fungicidas(goToMenuFromHerb: $goToHerbicidasMenu)) {
                 Image("icon_fung2")
                     .resizable()
                     .scaledToFit()
                     .frame(width: width * 0.11)
             }
             
-            // Icon spacer / divider
             Image("icon_divider")
                 .resizable()
                 .scaledToFit()
-                .frame(width: width * 0.1, height: heigth * 0.05)
+                .frame(width: width * 0.1, height: height * 0.05)
             
-            NavigationLink(destination: dosificacion(goToHerbicidasMenu: $goToHerbicidasMenu), isActive: $goToDosificacion) {
+            NavigationLink(destination: dosificacion(goToHerbicidasMenu: $goToHerbicidasMenu)) {
                 Image("icon_dosi")
                     .resizable()
                     .scaledToFit()

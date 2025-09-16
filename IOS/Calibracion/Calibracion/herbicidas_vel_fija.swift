@@ -9,13 +9,8 @@
 import SwiftUI
 
 struct herbicidas_vel_fija: View {
-    let screenWidth = UIScreen.main.bounds.size.width;
-    
     // Navigation variables
     @Binding var goToHerbicidasMenu: Bool
-    @State private var goToHerbicidas = false
-    @State private var goToFungicidas = false
-    @State private var goToDosificacion = false
     
     // Input variables
     @State private var descarga: Double? = nil
@@ -23,7 +18,7 @@ struct herbicidas_vel_fija: View {
     @State private var velocidad: Double? = nil
     @State private var resultado: Double? = nil
     
-    // State variables to control placeholder display - See if input is already introduced
+    // State variables to control placeholder display
     @State private var showPlaceholder = [false, false, false]
     // Spinner variable - toggle
     @State private var spinnerOpt: String = "m/s" // Default option
@@ -43,7 +38,7 @@ struct herbicidas_vel_fija: View {
             set: { newValue in
                 if let intValue = Double(newValue) {
                     input.wrappedValue = intValue
-                    showPlaceholder[placeholderIndex] = false // Reset placeholder on valid input
+                    showPlaceholder[placeholderIndex] = false
                 } else if newValue.isEmpty {
                     input.wrappedValue = nil
                 }
@@ -60,11 +55,9 @@ struct herbicidas_vel_fija: View {
                         .resizable()
                         .frame(width: geometry.size.width * 2, height: geometry.size.height * 0.3)
                     VStack {
-                        // Screen Title
                         Text("Método de velocidad fija")
                             .font(.custom("GlacialIndifference-Regular", size: geometry.size.width * 0.07))
                             .foregroundColor(.black)
-                        // Method description
                         Text("Determina el volumen de caldo que se aplicará en una hectárea.")
                             .font(.custom("GlacialIndifference-Regular", size: geometry.size.width * 0.05))
                             .foregroundColor(Color(hex: "#373636"))
@@ -74,23 +67,21 @@ struct herbicidas_vel_fija: View {
                 }
                 Spacer(minLength: geometry.size.height * 0.025)
                 
-                // First input
+                // Input fields
                 inputField("Descarga en 1 minuto (litros):", value: createBinding(for: $descarga, placeholderIndex: 0), placeholderIndex: 0, hint: "Descarga", geometry: geometry)
-                // Second input
                 inputField("Ancho de franja o distancia entre boquillas (metros):", value: createBinding(for: $ancho, placeholderIndex: 1), placeholderIndex: 1, hint: "Distancia", geometry: geometry)
-                // Third input
                 inputField("Velocidad", value: createBinding(for: $velocidad, placeholderIndex: 2), placeholderIndex: 2, hint: "Velocidad", geometry: geometry)
                 
-                // Calculate button
                 Spacer(minLength: geometry.size.height * 0.03)
                 HStack {
-                    Spacer() // Pushes the text to the right
+                    Spacer()
                     Button(action: {
                         calculateResult()
+                        ocultarTeclado()
                     }) {
                         Text("Calcular")
                             .font(.custom("GlacialIndifference-Regular", size: geometry.size.width * 0.049))
-                            .frame(width: geometry.size.width * 0.3, height: geometry.size.height * 0.06, alignment: .center)
+                            .frame(width: geometry.size.width * 0.3, height: geometry.size.height * 0.06)
                             .foregroundColor(.black)
                             .background(Color.accentColor)
                             .cornerRadius(geometry.size.width * 0.05)
@@ -99,19 +90,21 @@ struct herbicidas_vel_fija: View {
                 .padding(.horizontal, geometry.size.width * 0.05)
                 Spacer(minLength: geometry.size.height * 0.03)
                 
-                // Show result
                 result(resultado: resultado, geometry: geometry)
                 Spacer(minLength: geometry.size.height * 0.04)
                 
                 navigationMenu(width: geometry.size.width, height: geometry.size.height)
-            } // LazyVStack
-            .edgesIgnoringSafeArea(.all) // Fills all screen
+            }
         }
         .background(Color(hex: "#F4F4F4"))
-    } // Body
+        .edgesIgnoringSafeArea(.all)
+        .onTapGesture {
+            ocultarTeclado()
+        }
+    }
     
     @ViewBuilder
-    func inputField(_ label: String, exponent: String = "", value: Binding<String>, placeholderIndex: Int, hint: String, geometry: GeometryProxy) -> some View {
+    func inputField(_ label: String, value: Binding<String>, placeholderIndex: Int, hint: String, geometry: GeometryProxy) -> some View {
         HStack {
             Text(label)
                 .font(.custom("GlacialIndifference-Regular", size: geometry.size.width * 0.04))
@@ -132,7 +125,6 @@ struct herbicidas_vel_fija: View {
                 .accentColor(.black)
                 .frame(width: geometry.size.width * 0.21)
                 .onChange(of: spinnerOpt) { _ in
-                    // Recalculate result whenever spinnerOpt changes
                     calculateResult()
                 }
             }
@@ -142,7 +134,7 @@ struct herbicidas_vel_fija: View {
                 .font(.custom("GlacialIndifference-Regular", size: geometry.size.width * 0.04))
                 .foregroundColor(showPlaceholder[placeholderIndex] ? Color(hex: "#68FF0000") : Color(hex: "#373636"))
                 .multilineTextAlignment(.center)
-                .frame(width: geometry.size.width * 0.33, height: geometry.size.height * 0.06, alignment: .trailing)
+                .frame(width: geometry.size.width * 0.33, height: geometry.size.height * 0.06)
                 .background {
                     if #available(iOS 17.0, *) {
                         RoundedRectangle(cornerRadius: 65)
@@ -154,33 +146,28 @@ struct herbicidas_vel_fija: View {
                             .border(.accent, width: 2)
                     }
                 }
-        } // HStack
+        }
         .padding(.top, 10)
         .padding(.leading, 16)
         .padding(.trailing, 16)
-    } // InputField
+    }
     
-    // Decimal format
     func formatNumber(_ number: Double) -> String {
         let formatter = NumberFormatter()
-        
-        // Default style
         formatter.numberStyle = .decimal
         formatter.maximumFractionDigits = 3
         
-        // Scientific notation for very small numbers
         if abs(number) < 0.001 && number != 0 {
             formatter.numberStyle = .scientific
             formatter.maximumFractionDigits = 3
         }
         
-        // Remove decimals for integers
         if number == floor(number) {
             formatter.maximumFractionDigits = 0
         }
         
         return formatter.string(from: NSNumber(value: number)) ?? ""
-    } // decimal format
+    }
     
     @ViewBuilder
     func result(resultado: Double?, geometry: GeometryProxy) -> some View {
@@ -201,66 +188,62 @@ struct herbicidas_vel_fija: View {
     }
     
     func calculateResult() {
-        // Check if any input is missing
         showPlaceholder = [
             descarga == nil,
             ancho == nil,
             velocidad == nil
         ]
-        // Calculate if all inputs are given
-        if showPlaceholder.contains(true) == false {
-            // m/s result option
+        
+        if !showPlaceholder.contains(true) {
             if spinnerOpt == "m/s" {
                 let calculation = (((descarga ?? 0.0) * 10000) / ((velocidad ?? 1.0) * 60)) / (ancho ?? 1.0)
                 resultado = calculation
-            } else { // km/h option
+            } else {
                 let calculation = (((descarga ?? 0.0) * 10000) / (((velocidad ?? 1.0) / 3.6) * 60)) / (ancho ?? 1.0)
                 resultado = calculation
             }
         } else {
-            resultado = nil // Clear previous result if validation fails
+            resultado = nil
         }
     }
     
     @ViewBuilder
     func navigationMenu(width: CGFloat, height: CGFloat) -> some View {
-        // Navigation menu
         HStack {
-            // Herbicidas navigation
-            NavigationLink(destination: herbicidas(goToMenuFromHerb: $goToHerbicidasMenu), isActive: $goToHerbicidas) {
+            NavigationLink(destination: herbicidas(goToMenuFromHerb: $goToHerbicidasMenu)) {
                 Image("icon_herb")
                     .resizable()
                     .scaledToFit()
                     .frame(width: width * 0.11)
             }
-            // Icon spacer / divider
+            
             Image("icon_divider")
                 .resizable()
                 .scaledToFit()
                 .frame(width: width * 0.1, height: height * 0.05)
-            // Fungicidas icon navigation
-            NavigationLink(destination: fungicidas(goToMenuFromHerb: $goToHerbicidasMenu), isActive: $goToFungicidas) {
+            
+            NavigationLink(destination: fungicidas(goToMenuFromHerb: $goToHerbicidasMenu)) {
                 Image("icon_fung2")
                     .resizable()
                     .scaledToFit()
                     .frame(width: width * 0.11)
             }
-            // Icon spacer / divider
+            
             Image("icon_divider")
                 .resizable()
                 .scaledToFit()
                 .frame(width: width * 0.1, height: height * 0.05)
-            // Dosificacion icon navigation
-            NavigationLink(destination: dosificacion(goToHerbicidasMenu: $goToHerbicidasMenu), isActive: $goToDosificacion) {
+            
+            NavigationLink(destination: dosificacion(goToHerbicidasMenu: $goToHerbicidasMenu)) {
                 Image("icon_dosi")
                     .resizable()
                     .scaledToFit()
                     .frame(width: width * 0.11)
             }
-        } // HStack
+        }
         .navigationBarBackButtonHidden(true)
-    } // NavigationMenu
-} // Herbicidas View
+    }
+}
 
 #Preview {
     herbicidas_vel_fija(goToHerbicidasMenu: .constant(false))

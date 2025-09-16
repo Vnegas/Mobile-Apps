@@ -10,9 +10,7 @@ import SwiftUI
 
 struct fungicidas: View {
     @Binding var goToMenuFromHerb: Bool
-    @State private var goToMenuFung = false
-    @State private var goToFungArea = false
-    @State private var goToFungPlanta = false
+    @Environment(\.presentationMode) var presentationMode
 
     var body: some View {
         GeometryReader { geometry in
@@ -48,31 +46,34 @@ struct fungicidas: View {
                 Spacer(minLength: geometry.size.height * 0.06)
                 
                 // Button to "Por área"
-                NavigationLink(destination: fungicidas_area(goToFungicidasMenu: $goToMenuFung, goToHerbicidasMenu: $goToMenuFromHerb), isActive: $goToFungArea) {
+                NavigationLink(destination: fungicidas_area(goToFungicidasMenu: .constant(false), goToHerbicidasMenu: $goToMenuFromHerb)) {
                     Text("Por área")
                         .font(.custom("GlacialIndifference-Regular", size: geometry.size.width * 0.07))
-                        .frame(width: geometry.size.width * 0.5, height: geometry.size.height * 0.08) // Now scales dynamically
+                        .frame(width: geometry.size.width * 0.5, height: geometry.size.height * 0.08)
                         .foregroundColor(.black)
                         .background(Color.accentColor)
-                        .cornerRadius(geometry.size.width * 0.05) // Keeps proportional rounding
+                        .cornerRadius(geometry.size.width * 0.05)
                 }
                 
                 Spacer(minLength: geometry.size.height * 0.03)
                 
                 // Button to "Por planta"
-                NavigationLink(destination: fungicidas_planta(goToFungicidasMenu: $goToMenuFung, goToHerbicidasMenu: $goToMenuFung), isActive: $goToFungPlanta) {
+                NavigationLink(destination: fungicidas_planta(goToFungicidasMenu: .constant(false), goToHerbicidasMenu: $goToMenuFromHerb)) {
                     Text("Por planta")
                         .font(.custom("GlacialIndifference-Regular", size: geometry.size.width * 0.07))
-                        .frame(width: geometry.size.width * 0.5, height: geometry.size.height * 0.08) // Now scales dynamically
+                        .frame(width: geometry.size.width * 0.5, height: geometry.size.height * 0.08)
                         .foregroundColor(.black)
                         .background(Color.accentColor)
-                        .cornerRadius(geometry.size.width * 0.05) // Keeps proportional rounding
+                        .cornerRadius(geometry.size.width * 0.05)
                 }
                 
                 Spacer(minLength: geometry.size.height * 0.15)
                 
                 // "Atrás" Button
-                NavigationLink(destination: menu(goToStart: $goToMenuFung), isActive: $goToMenuFung) {
+                Button(action: {
+                    goToMenuFromHerb = false
+                    presentationMode.wrappedValue.dismiss()
+                }) {
                     Text("ATRÁS")
                         .font(.custom("GlacialIndifference-Regular", size: geometry.size.width * 0.07))
                         .foregroundColor(.black)

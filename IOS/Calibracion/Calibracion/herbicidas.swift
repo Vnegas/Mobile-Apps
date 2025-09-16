@@ -10,10 +10,7 @@ import SwiftUI
 
 struct herbicidas: View {
     @Binding var goToMenuFromHerb: Bool
-    @State private var goToMenuHerb = false
-    @State private var goToHerbVel = false
-    @State private var goToHerbVolFijo = false
-    @State private var goToHerbVolApl = false
+    @Environment(\.presentationMode) var presentationMode
 
     var body: some View {
         GeometryReader { geometry in
@@ -49,7 +46,7 @@ struct herbicidas: View {
                 Spacer(minLength: geometry.size.height * 0.04)
                 
                 // Button to "Volumen fijo"
-                NavigationLink(destination: herbicidas_vol_fijo(goToHerbicidasMenu: $goToMenuFromHerb), isActive: $goToHerbVolFijo) {
+                NavigationLink(destination: herbicidas_vol_fijo(goToHerbicidasMenu: $goToMenuFromHerb)) {
                     Text("Volumen fijo")
                         .font(.custom("GlacialIndifference-Regular", size: geometry.size.width * 0.07))
                         .frame(width: geometry.size.width * 0.8, height: geometry.size.height * 0.08)
@@ -61,7 +58,7 @@ struct herbicidas: View {
                 Spacer(minLength: geometry.size.height * 0.03)
                 
                 // Button to "Velocidad fija"
-                NavigationLink(destination: herbicidas_vel_fija(goToHerbicidasMenu: $goToMenuFromHerb), isActive: $goToHerbVel) {
+                NavigationLink(destination: herbicidas_vel_fija(goToHerbicidasMenu: $goToMenuFromHerb)) {
                     Text("Velocidad fija")
                         .font(.custom("GlacialIndifference-Regular", size: geometry.size.width * 0.07))
                         .frame(width: geometry.size.width * 0.8, height: geometry.size.height * 0.08)
@@ -73,7 +70,7 @@ struct herbicidas: View {
                 Spacer(minLength: geometry.size.height * 0.03)
                 
                 // Button to "Volumen aplicado"
-                NavigationLink(destination: herbicidas_vol_apl(goToHerbicidasMenu: $goToMenuFromHerb), isActive: $goToHerbVolApl) {
+                NavigationLink(destination: herbicidas_vol_apl(goToHerbicidasMenu: $goToMenuFromHerb)) {
                     Text("Volumen aplicado")
                         .font(.custom("GlacialIndifference-Regular", size: geometry.size.width * 0.07))
                         .frame(width: geometry.size.width * 0.8, height: geometry.size.height * 0.08)
@@ -85,7 +82,10 @@ struct herbicidas: View {
                 Spacer(minLength: geometry.size.height * 0.15)
                 
                 // "Atrás" Button
-                NavigationLink(destination: menu(goToStart: $goToMenuHerb), isActive: $goToMenuHerb) {
+                Button(action: {
+                    goToMenuFromHerb = false
+                    presentationMode.wrappedValue.dismiss()
+                }) {
                     Text("ATRÁS")
                         .font(.custom("GlacialIndifference-Regular", size: geometry.size.width * 0.07))
                         .foregroundColor(.black)

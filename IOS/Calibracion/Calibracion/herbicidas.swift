@@ -9,8 +9,7 @@
 import SwiftUI
 
 struct herbicidas: View {
-    @Binding var goToMenuFromHerb: Bool
-    @Environment(\.presentationMode) var presentationMode
+    @Binding var path: NavigationPath
 
     var body: some View {
         GeometryReader { geometry in
@@ -46,7 +45,9 @@ struct herbicidas: View {
                 Spacer(minLength: geometry.size.height * 0.04)
                 
                 // Button to "Volumen fijo"
-                NavigationLink(destination: herbicidas_vol_fijo(goToHerbicidasMenu: $goToMenuFromHerb)) {
+                Button(action: {
+                    path.append(AppRoute.herbicidasVolFijo)
+                }){
                     Text("Volumen fijo")
                         .font(.custom("GlacialIndifference-Regular", size: geometry.size.width * 0.07))
                         .frame(width: geometry.size.width * 0.8, height: geometry.size.height * 0.08)
@@ -58,7 +59,9 @@ struct herbicidas: View {
                 Spacer(minLength: geometry.size.height * 0.03)
                 
                 // Button to "Velocidad fija"
-                NavigationLink(destination: herbicidas_vel_fija(goToHerbicidasMenu: $goToMenuFromHerb)) {
+                Button(action: {
+                    path.append(AppRoute.herbicidasVelFija)
+                }){
                     Text("Velocidad fija")
                         .font(.custom("GlacialIndifference-Regular", size: geometry.size.width * 0.07))
                         .frame(width: geometry.size.width * 0.8, height: geometry.size.height * 0.08)
@@ -70,7 +73,9 @@ struct herbicidas: View {
                 Spacer(minLength: geometry.size.height * 0.03)
                 
                 // Button to "Volumen aplicado"
-                NavigationLink(destination: herbicidas_vol_apl(goToHerbicidasMenu: $goToMenuFromHerb)) {
+                Button(action: {
+                    path.append(AppRoute.herbicidasVolAplic)
+                }){
                     Text("Volumen aplicado")
                         .font(.custom("GlacialIndifference-Regular", size: geometry.size.width * 0.07))
                         .frame(width: geometry.size.width * 0.8, height: geometry.size.height * 0.08)
@@ -83,13 +88,13 @@ struct herbicidas: View {
                 
                 // "Atrás" Button
                 Button(action: {
-                    goToMenuFromHerb = false
-                    presentationMode.wrappedValue.dismiss()
+                    path.removeLast()
                 }) {
                     Text("ATRÁS")
                         .font(.custom("GlacialIndifference-Regular", size: geometry.size.width * 0.07))
                         .foregroundColor(.black)
-                        .frame(width: geometry.size.width - 70, height: 34, alignment: .leading)
+                        .frame(maxWidth: .infinity, alignment: .leading)
+                                .padding(.horizontal, 35)
                 }
 
                 Spacer()
@@ -102,5 +107,5 @@ struct herbicidas: View {
 }
 
 #Preview {
-    herbicidas(goToMenuFromHerb: .constant(false))
+    //herbicidas(path: )
 }

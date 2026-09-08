@@ -9,9 +9,8 @@
 import SwiftUI
 
 struct herbicidas_vol_fijo: View {
-    // Navigation variables
-    @Binding var goToHerbicidasMenu: Bool
-    @Environment(\.presentationMode) var presentationMode
+    // Navigation variable
+    @Binding var path: NavigationPath
     
     // Input variables
     @State private var descarga: Double? = nil
@@ -37,8 +36,10 @@ struct herbicidas_vol_fijo: View {
                 }
             },
             set: { newValue in
-                if let intValue = Double(newValue) {
-                    input.wrappedValue = intValue
+                let normalizedValue = newValue.replacingOccurrences(of: ",", with: ".")
+                
+                if let doubleValue = Double(normalizedValue) {
+                    input.wrappedValue = doubleValue
                     showPlaceholder[placeholderIndex] = false
                 } else if newValue.isEmpty {
                     input.wrappedValue = nil
@@ -121,7 +122,7 @@ struct herbicidas_vol_fijo: View {
                 .multilineTextAlignment(.center)
             Spacer()
             TextField(showPlaceholder[placeholderIndex] ? "Agregar Dato" : "\(hint)", text: value)
-                .keyboardType(.numberPad)
+                .keyboardType(.decimalPad)
                 .font(.custom("GlacialIndifference-Regular", size: geometry.size.width * 0.04))
                 .foregroundColor(showPlaceholder[placeholderIndex] ? Color(hex: "#68FF0000") : Color(hex: "#373636"))
                 .multilineTextAlignment(.center)
@@ -208,10 +209,24 @@ struct herbicidas_vol_fijo: View {
         }
     }
     
+    private func goToMenu(_ destination: AppRoute) {
+        // Remove everything ABOVE Main Menu.
+        // Main Menu is the first item in the path.
+        if path.count > 1 {
+            path.removeLast(path.count - 1)
+        }
+
+        // Add the selected menu
+        path.append(destination)
+    }
+
     @ViewBuilder
     func navigationMenu(width: CGFloat, height: CGFloat) -> some View {
         HStack {
-            NavigationLink(destination: herbicidas(goToMenuFromHerb: $goToHerbicidasMenu)) {
+            Button(action: {
+                goToMenu(.herbicidas)
+            })
+            {
                 Image("icon_herb")
                     .resizable()
                     .scaledToFit()
@@ -223,7 +238,10 @@ struct herbicidas_vol_fijo: View {
                 .scaledToFit()
                 .frame(width: width * 0.1, height: height * 0.05)
             
-            NavigationLink(destination: fungicidas(goToMenuFromHerb: $goToHerbicidasMenu)) {
+            Button(action: {
+                goToMenu(.fungicidas)
+            })
+            {
                 Image("icon_fung2")
                     .resizable()
                     .scaledToFit()
@@ -235,7 +253,10 @@ struct herbicidas_vol_fijo: View {
                 .scaledToFit()
                 .frame(width: width * 0.1, height: height * 0.05)
             
-            NavigationLink(destination: dosificacion(goToHerbicidasMenu: $goToHerbicidasMenu)) {
+            Button(action: {
+                goToMenu(.dosificacion)
+            })
+            {
                 Image("icon_dosi")
                     .resizable()
                     .scaledToFit()
@@ -246,5 +267,5 @@ struct herbicidas_vol_fijo: View {
 }
 
 #Preview {
-    herbicidas_vol_fijo(goToHerbicidasMenu: .constant(false))
+    //herbicidas_vol_fijo(goToHerbicidasMenu: .constant(false))
 }

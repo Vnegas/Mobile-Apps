@@ -9,8 +9,7 @@
 import SwiftUI
 
 struct fungicidas: View {
-    @Binding var goToMenuFromHerb: Bool
-    @Environment(\.presentationMode) var presentationMode
+    @Binding var path: NavigationPath
 
     var body: some View {
         GeometryReader { geometry in
@@ -46,7 +45,9 @@ struct fungicidas: View {
                 Spacer(minLength: geometry.size.height * 0.06)
                 
                 // Button to "Por área"
-                NavigationLink(destination: fungicidas_area(goToFungicidasMenu: .constant(false), goToHerbicidasMenu: $goToMenuFromHerb)) {
+                Button(action: {
+                    path.append(AppRoute.fungicidasArea)
+                }){
                     Text("Por área")
                         .font(.custom("GlacialIndifference-Regular", size: geometry.size.width * 0.07))
                         .frame(width: geometry.size.width * 0.5, height: geometry.size.height * 0.08)
@@ -58,7 +59,9 @@ struct fungicidas: View {
                 Spacer(minLength: geometry.size.height * 0.03)
                 
                 // Button to "Por planta"
-                NavigationLink(destination: fungicidas_planta(goToFungicidasMenu: .constant(false), goToHerbicidasMenu: $goToMenuFromHerb)) {
+                Button(action: {
+                    path.append(AppRoute.fungicidasPlanta)
+                }){
                     Text("Por planta")
                         .font(.custom("GlacialIndifference-Regular", size: geometry.size.width * 0.07))
                         .frame(width: geometry.size.width * 0.5, height: geometry.size.height * 0.08)
@@ -71,13 +74,13 @@ struct fungicidas: View {
                 
                 // "Atrás" Button
                 Button(action: {
-                    goToMenuFromHerb = false
-                    presentationMode.wrappedValue.dismiss()
+                    path.removeLast()
                 }) {
                     Text("ATRÁS")
                         .font(.custom("GlacialIndifference-Regular", size: geometry.size.width * 0.07))
                         .foregroundColor(.black)
-                        .frame(width: geometry.size.width - 70, height: 34, alignment: .leading)
+                        .frame(maxWidth: .infinity, alignment: .leading)
+                                .padding(.horizontal, 35)
                 }
 
                 Spacer()
@@ -90,5 +93,5 @@ struct fungicidas: View {
 }
 
 #Preview {
-    fungicidas(goToMenuFromHerb: .constant(false))
+    //fungicidas(path: )
 }

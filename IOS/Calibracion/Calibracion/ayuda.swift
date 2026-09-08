@@ -3,13 +3,13 @@
 //  Calibracion
 //
 //  Created by vnegas on 6/3/25.
-//  Copyright 2023-2024-2025 Sebastian Venegas Brenes https://github.com/Vnegas/Mobile-Apps
+//  Copyright 2023-2026 Sebastian Venegas Brenes https://github.com/Vnegas/Mobile-Apps
 //
 
 import SwiftUI
 
 struct ayuda: View {
-    @Binding var goToMenu: Bool
+    @Binding var path: NavigationPath
     @Environment(\.presentationMode) var presentationMode
     
     var body: some View {
@@ -56,8 +56,7 @@ struct ayuda: View {
                     
                     HStack {
                         Button(action: {
-                            goToMenu = false
-                            presentationMode.wrappedValue.dismiss()
+                            path.removeLast()
                         }) {
                             Text("ATRÁS")
                                 .font(.custom("GlacialIndifference-Regular", size: geometry.size.width * 0.06))
@@ -78,7 +77,7 @@ struct ayuda: View {
 
 // Preview
 #Preview {
-    ayuda(goToMenu: .constant(true))
+    //ayuda(goToMenu: .constant(true))
 }
 
 // FUENTES

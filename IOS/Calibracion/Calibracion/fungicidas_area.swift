@@ -9,9 +9,8 @@
 import SwiftUI
 
 struct fungicidas_area: View {
-    // Navigation variables
-    @Binding var goToFungicidasMenu: Bool
-    @Binding var goToHerbicidasMenu: Bool
+    // Navigation variable
+    @Binding var path: NavigationPath
     
     // Input variables
     @State private var areaAplicada: Double? = nil
@@ -129,7 +128,7 @@ struct fungicidas_area: View {
                     }
                 }
             ))
-            .keyboardType(.numberPad)
+            .keyboardType(.decimalPad)
             .font(.custom("GlacialIndifference-Regular", size: width * 0.04))
             .frame(width: width * 0.4, height: width * 0.1)
             .multilineTextAlignment(.center)
@@ -170,10 +169,24 @@ struct fungicidas_area: View {
         }
     }
     
+    private func goToMenu(_ destination: AppRoute) {
+        // Remove everything ABOVE Main Menu.
+        // Main Menu is the first item in the path.
+        if path.count > 1 {
+            path.removeLast(path.count - 1)
+        }
+
+        // Add the selected menu
+        path.append(destination)
+    }
+
     @ViewBuilder
     func navigationMenu(width: CGFloat, height: CGFloat) -> some View {
         HStack {
-            NavigationLink(destination: herbicidas(goToMenuFromHerb: $goToHerbicidasMenu)) {
+            Button(action: {
+                goToMenu(.herbicidas)
+            })
+            {
                 Image("icon_herb")
                     .resizable()
                     .scaledToFit()
@@ -185,7 +198,10 @@ struct fungicidas_area: View {
                 .scaledToFit()
                 .frame(width: width * 0.1, height: height * 0.05)
             
-            NavigationLink(destination: fungicidas(goToMenuFromHerb: $goToHerbicidasMenu)) {
+            Button(action: {
+                goToMenu(.fungicidas)
+            })
+            {
                 Image("icon_fung2")
                     .resizable()
                     .scaledToFit()
@@ -197,17 +213,19 @@ struct fungicidas_area: View {
                 .scaledToFit()
                 .frame(width: width * 0.1, height: height * 0.05)
             
-            NavigationLink(destination: dosificacion(goToHerbicidasMenu: $goToHerbicidasMenu)) {
+            Button(action: {
+                goToMenu(.dosificacion)
+            })
+            {
                 Image("icon_dosi")
                     .resizable()
                     .scaledToFit()
                     .frame(width: width * 0.11)
             }
         }
-        .navigationBarBackButtonHidden(true)
     }
 }
 
 #Preview {
-    fungicidas_area(goToFungicidasMenu: .constant(false), goToHerbicidasMenu: .constant(false))
+    //fungicidas_area(goToFungicidasMenu: .constant(false), goToHerbicidasMenu: .constant(false))
 }

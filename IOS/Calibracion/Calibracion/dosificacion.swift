@@ -92,13 +92,13 @@ struct dosificacion: View {
                             dosis == nil,
                             area == nil
                         ]
-                        if showPlaceholder.contains(true) {
+                        if !showPlaceholder.contains(true) {
                             let calculation1 = ((dosis ?? 0.0) / (volumen ?? 1.0)) * 1000
                             resultado1 = calculation1
                             
                             let calculation2 = ((volumen ?? 0.0) * (area ?? 0.0)) / 10000
                             resultado2 = calculation2
-                            
+                            	
                             let calculation3 = (((dosis ?? 0.0) * (area ?? 0.0)) / 10000) * 1000
                             resultado3 = calculation3
                         } else {
